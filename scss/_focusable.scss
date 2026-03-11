@@ -1,0 +1,13 @@
+body {
+    user-select: none;
+    caret-color: transparent;
+}
+
+.allow-copy {
+    user-select: text;
+}
+
+.focusable {
+    user-select: text;
+    caret-color: auto;
+}

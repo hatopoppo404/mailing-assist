@@ -1,0 +1,34 @@
+.custom-scrollbar__y {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.custom-scrollbar__x {
+    overflow: scroll;
+    overflow-y: hidden;
+}
+
+// バー
+.custom-scrollbar__y::-webkit-scrollbar,
+.custom-scrollbar__x::-webkit-scrollbar {
+    width: 8px;
+}
+
+// レール
+.custom-scrollbar__y::-webkit-scrollbar-track,
+.custom-scrollbar__x::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+// つまみ
+.custom-scrollbar__y::-webkit-scrollbar-thumb,
+.custom-scrollbar__x::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+// ホバー
+.custom-scrollbar__y::-webkit-scrollbar-thumb:hover,
+.custom-scrollbar__x::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
+}

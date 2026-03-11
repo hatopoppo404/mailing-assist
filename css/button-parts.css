@@ -1,0 +1,51 @@
+.btn {
+  border-radius: var(--radius-full);
+  padding: var(--padding-default);
+  border-radius: var(--radius-full);
+}
+
+.btn-with-icon {
+  border-radius: var(--radius-full);
+  padding: var(--padding-default);
+  border-radius: var(--radius-full);
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-12);
+  align-items: center;
+  justify-content: center;
+}
+.btn-with-icon i {
+  display: inline-block;
+  flex-shrink: 0;
+  color: currentColor;
+  width: var(--icon-width);
+}
+.btn-with-icon svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.btn-with-icon svg * {
+  stroke-width: var(--icon-stroke-width);
+  fill: var(--icon-fill-default);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cta-btn {
+  border-radius: var(--radius-full);
+  padding: var(--padding-default);
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-dark);
+  border: 2px solid transparent;
+  cursor: pointer;
+  width: calc(100% - 40px);
+  font-size: large;
+  transition: var(--transition-default);
+  margin: auto;
+  text-align: center;
+  vertical-align: middle;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), linear-gradient(45deg, var(--color-primary-1), var(--color-primary-2));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}/*# sourceMappingURL=button-parts.css.map */

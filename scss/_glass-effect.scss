@@ -1,0 +1,10 @@
+@mixin glass-effect {
+    background: var(--color-glass-bg);
+    box-shadow: var(--shadow-glass);
+    backdrop-filter: var(--blur-default);
+    border: var(--border-default);
+}
+
+.glass-effect {
+    @include glass-effect;
+}

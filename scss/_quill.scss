@@ -1,0 +1,106 @@
+.editor-container {
+    margin: var(--space-md) var(--space-3xl);
+    border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+    background-color: var(--color-wrapper);
+    padding: var(--space-3xl);
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.subject-container {
+    height: 40px;
+    margin: 0 0 var(--space-sm);
+
+    border: var(--border-default);
+    border-radius: var(--radius-sm);
+
+    overflow: hidden;
+
+    & .subject-input {
+        border: none;
+        outline: none;
+
+        height: 100%;
+        padding: 0 var(--space-sm);
+        width: calc(100% - var(--space-sm) * 2);
+    }
+}
+
+#editor {
+    flex: 1;
+}
+
+.editor-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-wrapper);
+    border: none;
+}
+
+.ql-toolbar.ql-snow {
+    background: var(--color-glass-bg) !important;
+    backdrop-filter: var(--blur-default) !important;
+    -webkit-backdrop-filter: var(--blur-default) !important;
+    border: var(--border-default) !important;
+    box-shadow: var(--shadow-glass) !important;
+    border-radius: var(--radius-sm);
+    // margin: 0 var(--space-3xl);
+    z-index: 1;
+}
+
+.ql-container.ql-snow {
+    border: none !important;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    color: var(--color-text__dark);
+    flex-grow: 1;
+    height: 100%;
+}
+
+.ql-editor {
+    strong, b {
+        font-weight: bold;
+    }
+
+    em, i {
+        font-style: italic;
+    }
+
+    u {
+        text-decoration: underline;
+    }
+
+    ul {
+        list-style-type: disc;
+        padding-left: var(--space-lg);
+    }
+
+    ol {
+        list-style-type: decimal;
+        padding-left: var(--space-lg);
+    }
+
+    /* 2. エディタ内のテーブル */
+    table {
+        border-collapse: collapse !important;
+        width: 100% !important;
+        margin: var(--space-sm) 0;
+    }
+
+    td {
+        border: var(--border-default) !important;
+        padding: 4px 8px !important;
+        min-width: 40px;
+    }
+}
+
+/* アイコンの色制御 */
+.ql-snow .ql-stroke {
+    stroke: var(--color-bg-dark) !important;
+}
+
+.ql-snow .ql-fill {
+    fill: var(--color-primary-1) !important;
+}

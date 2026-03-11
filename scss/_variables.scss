@@ -1,0 +1,49 @@
+:root {
+    --color-bg-dark: rgba(85, 85, 85, 1);
+    --color-container: rgba(242, 242, 242, 1);
+    --color-wrapper: rgba(255, 255, 255, 1);
+    --color-text__dark: rgba(51, 51, 51, 1);
+    --color-text__light: rgba(242, 242, 242, 1);
+    --color-danger: rgba(255, 77, 77, 1);
+    --color-glass-bg: rgba(199, 199, 199, 0.3);
+    --color-overlay: rgba(0, 0, 0, 0.5);
+    --color-hover: rgba(255, 255, 255, 0.3);
+
+    --color-primary-1: #4285f4;
+    --color-primary-2: #9b72cb;
+
+    --font-size-sm: 10px;
+    --font-size-md: 12px;
+    --font-size-lg: 16px;
+    --font-size-xl: 20px;
+
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 20px;
+    --space-2xl: 24px;
+    --space-3xl: 32px;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 32px;
+    --radius-xl: 40px;
+    --radius-2xl: 64px;
+    --radius-full: 9999px;
+
+    --border-default: 1px solid rgba(206, 206, 206, 1);
+    --shadow-glass: 0 0 6px rgba(0, 0, 0, 0.2);
+    --shadow-hover: 0 0 8px rgba(0, 0, 0, 0.3);
+    --focus-ring: 0 0 0 3px rgba(180, 216, 255, 0.5);
+    --transition-default: 0.3s;
+    --padding-default: var(--space-sm) var(--space-xl);
+
+    --header-height: 200px;
+    --footer-height: 200px;
+    --icon-width: 24px;
+    --icon-backspace-width: 20px;
+    --icon-stroke-width: 2px;
+    --icon-fill-default: none;
+
+    --blur-default: blur(10px);
+}
