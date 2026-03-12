@@ -87,7 +87,7 @@
     @include btn-with-icon;
 }
 
-.cta-btn {
+.btn-cta {
     @include btn-with-icon;
 
     background-color: var(--color-bg-dark);
@@ -103,5 +103,51 @@
     span, p, & {
         color: var(--color-text__light);
         font-size: var(--font-size-md);
+    }
+}
+
+.btn-test {
+    @include btn-with-icon;
+    padding: 16px;
+    width: 56px;
+    background: none;
+    margin-left: auto;
+
+    & i {
+        margin: 0;
+        padding: 12px;
+        background-color: #fff;
+        border-radius: 9999px;
+        transition: transform 0.7s;
+    }
+
+    & span {
+        max-width: 0;
+        margin-left: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        opacity: 0;
+        transform: translateX(24px);
+        transition:
+            max-width 0.7s,
+            opacity 0.7s,
+            transform 0.7s;
+    }
+
+    &:hover {
+        width: fit-content;
+        box-shadow: none;
+        border: var(--boder-default);
+        background-color: #fff;
+
+        & i {
+            transform: translateX(-2px);
+        }
+
+        & span {
+            max-width: fit-content;
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
 }
