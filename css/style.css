@@ -238,8 +238,11 @@ body header {
   place-self: center;
   padding: var(--space-xl);
   margin: 0 0 var(--space-xl);
-  width: 100%;
+  width: calc(100% - var(--space-md) * 2);
   border-bottom: var(--border-default);
+}
+body {
+  background-color: var(--color-danger);
 }
 
 .custom-scrollbar__y {
