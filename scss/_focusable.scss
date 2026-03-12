@@ -3,6 +3,15 @@ body {
     caret-color: transparent;
 }
 
+input,
+textarea,
+[contenteditable="true"] {
+    user-select: text;
+    /* 文字の選択を許可 */
+    caret-color: auto;
+    /* カーソルの点滅を標準に戻す */
+}
+
 .allow-copy {
     user-select: text;
 }
@@ -10,4 +19,9 @@ body {
 .focusable {
     user-select: text;
     caret-color: auto;
+
+    &:focus {
+        outline: none;
+        box-shadow: var(--focus-ring);
+    }
 }

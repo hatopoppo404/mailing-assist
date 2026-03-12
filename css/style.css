@@ -161,6 +161,25 @@ select {
   vertical-align: middle;
 }
 
+body {
+  font-family: "游ゴシック", sans-serif;
+  font-size: var(--font-size-default);
+  font: 400;
+  color: var(--color-text__dark);
+}
+
+h1 {
+  font-size: var(--font-size-xl);
+}
+
+h2 {
+  font-size: var(--font-size-lg);
+}
+
+h3 {
+  font-size: var(--font-size-md);
+}
+
 :root {
   --color-bg-dark: rgba(85, 85, 85, 1);
   --color-container: rgba(242, 242, 242, 1);
@@ -175,7 +194,8 @@ select {
   --color-border: rgba(206, 206, 206, 1);
   --color-primary-1: #4285f4;
   --color-primary-2: #9b72cb;
-  --font-size-sm: 10px;
+  --font-size-sm: 8px;
+  --font-size-default: 10px;
   --font-size-md: 12px;
   --font-size-lg: 16px;
   --font-size-xl: 20px;
@@ -552,6 +572,17 @@ body {
   caret-color: transparent;
 }
 
+input,
+textarea,
+[contenteditable=true] {
+  -webkit-user-select: text;
+     -moz-user-select: text;
+          user-select: text;
+  /* 文字の選択を許可 */
+  caret-color: auto;
+  /* カーソルの点滅を標準に戻す */
+}
+
 .allow-copy {
   -webkit-user-select: text;
      -moz-user-select: text;
@@ -563,6 +594,10 @@ body {
      -moz-user-select: text;
           user-select: text;
   caret-color: auto;
+}
+.focusable:focus {
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 
 .editor-container {
@@ -619,6 +654,9 @@ body {
   height: 100%;
 }
 
+.ql-editor {
+  font-size: var(--font-size-default);
+}
 .ql-editor strong, .ql-editor b {
   font-weight: bold;
 }
@@ -676,6 +714,7 @@ body {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+  border-radius: var(--radius-full);
   width: calc(100% - var(--space-md));
   height: 1px;
   background-color: var(--color-border);
@@ -721,13 +760,14 @@ body {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+  border-radius: var(--radius-full);
   width: calc(100% - var(--space-md));
   height: 1px;
   background-color: var(--color-border);
 }
 .table__with-two-cards tr:not(:last-child) td:not(.is-start):not(.is-end)::before {
   width: calc(100% + var(--space-3xl));
-  z-index: 9999;
+  z-index: 1;
 }
 .table__with-two-cards td {
   vertical-align: middle;
