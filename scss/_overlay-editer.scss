@@ -1,0 +1,35 @@
+@use 'glass-effect' as *;
+
+.overlay-editer {
+    @include glass-effect;
+
+    transform: translateY(10px);
+    opacity: 0;
+    transition: transform 100ms ease-out, opacity 100ms ease-out;
+    position: absolute;
+    bottom: 0;
+
+    color: var(--color-text__light);
+    padding: var(--space-xl);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    width: calc(100% - 50px);
+    height: 75%;
+    border: var(--border-default);
+    border-bottom: none;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xl);
+}
+
+.modal-overlay.is-open {
+    background-color: var(--color-overlay);
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.modal-overlay.is-open .overlay-editer {
+    transform: translateY(0);
+    opacity: 1;
+}

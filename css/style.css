@@ -187,7 +187,7 @@ h3 {
   --color-text__dark: rgba(51, 51, 51, 1);
   --color-text__light: rgba(242, 242, 242, 1);
   --color-danger: rgba(255, 77, 77, 1);
-  --color-glass-bg: rgba(199, 199, 199, 0.3);
+  --color-glass-bg: rgba(141, 141, 141, 0.3);
   --color-overlay: rgba(0, 0, 0, 0.5);
   --color-hover: rgba(255, 255, 255, 0.3);
   --color-btn-hover: rgb(223, 223, 223);
@@ -786,4 +786,38 @@ textarea,
   z-index: -1;
   inset: 0 0 auto auto;
   transform: translateX(var(--space-sm));
+}
+
+.overlay-editer {
+  background: var(--color-glass-bg);
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: var(--blur-default);
+  border: var(--border-default);
+  transform: translateY(10px);
+  opacity: 0;
+  transition: transform 100ms ease-out, opacity 100ms ease-out;
+  position: absolute;
+  bottom: 0;
+  color: var(--color-text__light);
+  padding: var(--space-xl);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  width: calc(100% - 50px);
+  height: 75%;
+  border: var(--border-default);
+  border-bottom: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.modal-overlay.is-open {
+  background-color: var(--color-overlay);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.modal-overlay.is-open .overlay-editer {
+  transform: translateY(0);
+  opacity: 1;
 }/*# sourceMappingURL=style.css.map */
