@@ -227,6 +227,21 @@ h3 {
   --blur-default: blur(10px);
 }
 
+body {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  grid-template-areas: "header header" "left-side main" "footer footer";
+  gap: var(--space-md);
+}
+body header {
+  grid-area: header;
+  place-self: center;
+  padding: var(--space-xl);
+  margin: 0 0 var(--space-xl);
+  width: 100%;
+  border-bottom: var(--border-default);
+}
+
 .custom-scrollbar__y {
   overflow: scroll;
   overflow-x: hidden;
