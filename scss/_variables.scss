@@ -8,6 +8,7 @@
     --color-glass-bg: rgba(199, 199, 199, 0.3);
     --color-overlay: rgba(0, 0, 0, 0.5);
     --color-hover: rgba(255, 255, 255, 0.3);
+    --color-btn-hover: rgb(223, 223, 223);
 
     --color-primary-1: #4285f4;
     --color-primary-2: #9b72cb;
@@ -36,7 +37,7 @@
     --shadow-hover: 0 0 8px rgba(0, 0, 0, 0.3);
     --focus-ring: 0 0 0 3px rgba(180, 216, 255, 0.5);
     --transition-default: 0.3s;
-    --padding-default: var(--space-sm) var(--space-xl);
+    --padding-default: var(--space-lg) var(--space-xl);
 
     --header-height: 200px;
     --footer-height: 200px;

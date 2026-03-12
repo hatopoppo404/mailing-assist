@@ -1,23 +1,27 @@
-// button > (i > svg > *) + span
+// button > .wrapper-icon((i > svg > *)) + span
 
-// <button class="btn">
-//     <span>メールを作成する</span>
-// </button>
-// <button class="cta-btn">
+// <button class="btn-cta">
+//     <div class="wrapper-icon">
 //     <i class="icon-download" aria-hidden="true">
 //         <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
 //             <path
 //                 d="M38 26V34C38 35.0609 37.5786 36.0783 36.8284 36.8284C36.0783 37.5786 35.0609 38 34 38H6C4.93913 38 3.92172 37.5786 3.17157 36.8284C2.42143 36.0783 2 35.0609 2 34V26M10 16L20 26M20 26L30 16M20 26V2" />
 //         </svg>
 //     </i>
+//     </div>
 //     <span>メールを作成する</span>
 // </button>
 
 @mixin btn {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
 
     border-radius: var(--radius-full);
     padding: var(--padding-default);
     border: var(--boder-default);
+    background-color: var(--color-container);
     cursor: pointer;
 
     &:hover {
@@ -52,25 +56,27 @@
     align-items: center;
     justify-content: center;
 
+    & .wrapper-icon {
 
-    & i {
-        display: block;
-        flex-shrink: 0;
-        color: currentColor;
-        width: var(--icon-width);
-    }
+        & i {
+            display: block;
+            flex-shrink: 0;
+            color: currentColor;
+            width: var(--icon-width);
+        }
 
-    & svg {
-        display: block;
-        width: 100%;
-        height: auto;
+        & svg {
+            display: block;
+            width: 100%;
+            height: auto;
 
-        & * {
-            stroke: currentColor;
-            stroke-width: var(--icon-stroke-width);
-            fill: var(--icon-fill-default);
-            stroke-linecap: round;
-            stroke-linejoin: round;
+            & * {
+                stroke: currentColor;
+                stroke-width: var(--icon-stroke-width);
+                fill: var(--icon-fill-default);
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
         }
     }
 
@@ -106,46 +112,85 @@
     }
 }
 
-.btn-test {
-    @include btn-with-icon;
-    padding: 16px;
-    width: 56px;
-    background: none;
-    margin-left: auto;
+.wrapper-btn {
+    display: flex;
+    width: 100%;
+}
 
-    & i {
-        margin: 0;
-        padding: 12px;
-        background-color: #fff;
-        border-radius: 9999px;
-        transition: transform 0.7s;
+
+.btn-icon-moving-left {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: auto;
+    padding: 0;
+
+    background: none;
+    background-color: var(--color-btn-hover);
+    border: var(--boder-default);
+    border-radius: var(--radius-full);
+    outline: none;
+    cursor: pointer;
+
+    & .wrapper-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        padding: var(--space-lg);
+
+        background-color: var(--color-container);
+        border-radius: var(--radius-full);
+        transition: transform 0.3s ease;
+
+        & > i {
+            display: flex;
+            align-items: center;
+            width: var(--icon-width);
+            height: 100%;
+            color: currentColor;
+            transition: transform 0.3s;
+
+            & > svg {
+                width: 100%;
+                height: auto;
+
+                & * {
+                    fill: var(--icon-fill-default);
+                    stroke: currentColor;
+                    stroke-width: var(--icon-stroke-width);
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                }
+            }
+        }
     }
 
-    & span {
+    & > .wrapper-icon + span {
+        display: inline-block;
         max-width: 0;
-        margin-left: 0;
+        opacity: 0;
         overflow: hidden;
         white-space: nowrap;
-        opacity: 0;
-        transform: translateX(24px);
+        transform: translateX(8px);
         transition:
-            max-width 0.7s,
-            opacity 0.7s,
-            transform 0.7s;
+            max-width 0.3s,
+            margin-left 0.3s,
+            opacity 0.2s,
+            transform 0.3s;
     }
 
     &:hover {
-        width: fit-content;
-        box-shadow: none;
-        border: var(--boder-default);
-        background-color: #fff;
-
-        & i {
+        & > .wrapper-icon {
             transform: translateX(-2px);
         }
 
-        & span {
-            max-width: fit-content;
+        & > .wrapper-icon + span {
+            max-width: 120px;
+            margin-left: 1px;
+            margin-right: 16px;
             opacity: 1;
             transform: translateX(0);
         }
