@@ -1,20 +1,48 @@
 @mixin table {
     & th {
         padding: var(--space-sm);
-        background-color: var(--color-container);
         position: sticky;
         top: 0;
         z-index: 1;
+        max-height: 300px;
     }
 
     & tr {
-        // & td:first-child {
-        //     padding-left: var(--space-sm);
+        // &:not(:last-child) td {
+        //     // border-bottom: var(--border-default);
+        //     position: relative;
+        //     /* 線の基準点 */
+
+        //     &::after {
+        //         content: "";
+        //         position: absolute;
+        //         bottom: 0;
+        //         left: 50%;
+        //         transform: translateX(-50%);
+
+        //         width: calc(100% - var(--space-sm));
+        //         height: 1px;
+        //         background-color: var(--color-border);
+        //     }
         // }
 
-        &:not(:last-child) td {
-            border-bottom: var(--border-default);
+        &:not(:last-child) {
+            position: relative;
+            /* 1. 基準を定義 */
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+
+                width: calc(100% - var(--space-md));
+                height: 1px;
+                background-color: var(--color-border);
+            }
         }
+
 
         &:first-child td:first-child {
             border-top-left-radius: var(--radius-md);
@@ -37,11 +65,89 @@
         vertical-align: middle;
         background-color: var(--color-wrapper);
         padding: var(--space-sm);
-        width: fit-content;
     }
 }
 
 .table__one-column {
     @include table;
+}
 
+.table__with-two-cards {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: var(--space-sm) 0;
+
+    // 行ごとの指定
+    & tr {
+
+        // 1行目のセルの上側を丸くする
+        &:first-child td {
+
+            &:first-child,
+            &.is-start {
+                border-top-left-radius: var(--radius-md) !important;
+            }
+
+            &:last-child,
+            &.is-end {
+                border-top-right-radius: var(--radius-md) !important;
+            }
+        }
+
+        // 最終行のセルの下側を丸くする
+        &:last-child td {
+
+            &:first-child,
+            &.is-start {
+                border-bottom-left-radius: var(--radius-md) !important;
+            }
+
+            &:last-child,
+            &.is-end {
+                border-bottom-right-radius: var(--radius-md) !important;
+            }
+        }
+
+        &:not(:last-child) {
+            & td::before {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+
+                width: calc(100% - var(--space-md));
+                height: 1px;
+                background-color: var(--color-border);
+            }
+
+            & td:not(.is-start):not(.is-end)::before {
+                width: calc(100% + var(--space-3xl));
+                z-index: 9999;
+            }
+        }
+    }
+
+    & td {
+        vertical-align: middle;
+        background-color: var(--color-wrapper);
+        padding: var(--space-sm);
+        background-clip: padding-box;
+        position: relative;
+
+        &:not(.is-end)::after {
+            content: "";
+            width: var(--space-sm);
+            height: 100%;
+            background-color: var(--color-wrapper);
+            // background-color: #000;
+
+            display: block;
+            position: absolute;
+            z-index: -1;
+
+            inset: 0 0 auto auto;
+            transform: translateX(var(--space-sm));
+        }
+    }
 }

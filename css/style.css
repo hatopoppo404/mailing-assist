@@ -172,6 +172,7 @@ select {
   --color-overlay: rgba(0, 0, 0, 0.5);
   --color-hover: rgba(255, 255, 255, 0.3);
   --color-btn-hover: rgb(223, 223, 223);
+  --color-border: rgba(206, 206, 206, 1);
   --color-primary-1: #4285f4;
   --color-primary-2: #9b72cb;
   --font-size-sm: 10px;
@@ -190,7 +191,7 @@ select {
   --radius-xl: 40px;
   --radius-2xl: 64px;
   --radius-full: 9999px;
-  --border-default: 1px solid rgba(206, 206, 206, 1);
+  --border-default: 1px solid var(--color-border);
   --shadow-glass: 0 0 6px rgba(0, 0, 0, 0.2);
   --shadow-hover: 0 0 8px rgba(0, 0, 0, 0.3);
   --focus-ring: 0 0 0 3px rgba(180, 216, 255, 0.5);
@@ -660,13 +661,24 @@ body {
 
 .table__one-column th {
   padding: var(--space-sm);
-  background-color: var(--color-container);
   position: sticky;
   top: 0;
   z-index: 1;
+  max-height: 300px;
 }
-.table__one-column tr:not(:last-child) td {
-  border-bottom: var(--border-default);
+.table__one-column tr:not(:last-child) {
+  position: relative;
+  /* 1. 基準を定義 */
+}
+.table__one-column tr:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - var(--space-md));
+  height: 1px;
+  background-color: var(--color-border);
 }
 .table__one-column tr:first-child td:first-child {
   border-top-left-radius: var(--radius-md);
@@ -684,6 +696,54 @@ body {
   vertical-align: middle;
   background-color: var(--color-wrapper);
   padding: var(--space-sm);
-  width: -moz-fit-content;
-  width: fit-content;
+}
+
+.table__with-two-cards {
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: var(--space-sm) 0;
+}
+.table__with-two-cards tr:first-child td:first-child, .table__with-two-cards tr:first-child td.is-start {
+  border-top-left-radius: var(--radius-md) !important;
+}
+.table__with-two-cards tr:first-child td:last-child, .table__with-two-cards tr:first-child td.is-end {
+  border-top-right-radius: var(--radius-md) !important;
+}
+.table__with-two-cards tr:last-child td:first-child, .table__with-two-cards tr:last-child td.is-start {
+  border-bottom-left-radius: var(--radius-md) !important;
+}
+.table__with-two-cards tr:last-child td:last-child, .table__with-two-cards tr:last-child td.is-end {
+  border-bottom-right-radius: var(--radius-md) !important;
+}
+.table__with-two-cards tr:not(:last-child) td::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - var(--space-md));
+  height: 1px;
+  background-color: var(--color-border);
+}
+.table__with-two-cards tr:not(:last-child) td:not(.is-start):not(.is-end)::before {
+  width: calc(100% + var(--space-3xl));
+  z-index: 9999;
+}
+.table__with-two-cards td {
+  vertical-align: middle;
+  background-color: var(--color-wrapper);
+  padding: var(--space-sm);
+  background-clip: padding-box;
+  position: relative;
+}
+.table__with-two-cards td:not(.is-end)::after {
+  content: "";
+  width: var(--space-sm);
+  height: 100%;
+  background-color: var(--color-wrapper);
+  display: block;
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 auto auto;
+  transform: translateX(var(--space-sm));
 }/*# sourceMappingURL=style.css.map */
