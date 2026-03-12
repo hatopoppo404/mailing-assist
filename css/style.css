@@ -353,11 +353,10 @@ body {
 }
 
 .ql-toolbar.ql-snow {
-  background: var(--color-glass-bg) !important;
-  backdrop-filter: var(--blur-default) !important;
-  -webkit-backdrop-filter: var(--blur-default) !important;
-  border: var(--border-default) !important;
-  box-shadow: var(--shadow-glass) !important;
+  background: var(--color-glass-bg);
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: var(--blur-default);
+  border: var(--border-default);
   border-radius: var(--radius-sm);
   z-index: 1;
 }
@@ -408,4 +407,34 @@ body {
 
 .ql-snow .ql-fill {
   fill: var(--color-primary-1) !important;
+}
+
+.table__one-column th {
+  padding: var(--space-sm);
+  background-color: var(--color-container);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.table__one-column tr:not(:last-child) td {
+  border-bottom: var(--border-default);
+}
+.table__one-column tr:first-child td:first-child {
+  border-top-left-radius: var(--radius-md);
+}
+.table__one-column tr:first-child td:last-child {
+  border-top-right-radius: var(--radius-md);
+}
+.table__one-column tr:last-child td:first-child {
+  border-bottom-left-radius: var(--radius-md);
+}
+.table__one-column tr:last-child td:last-child {
+  border-bottom-right-radius: var(--radius-md);
+}
+.table__one-column td {
+  vertical-align: middle;
+  background-color: var(--color-wrapper);
+  padding: var(--space-sm);
+  width: -moz-fit-content;
+  width: fit-content;
 }/*# sourceMappingURL=style.css.map */

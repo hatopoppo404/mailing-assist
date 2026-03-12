@@ -1,3 +1,17 @@
+// <section class="editor-container">
+//     <div class="subject-container">
+//         <input type="text" class="subject-input" id="subject-input" placeholder="件名を入力してください（例：{{company}}様へのお知らせ）">
+//     </div>
+//     <div class="editor-wrapper">
+//         <div id="editor">
+//             <p>ここにメール本文を書いてください。</p>
+//             <p>宛先ごとに変えたい部分は <strong>{{名前}}</strong> のように設定できます。</p>
+//         </div>
+//     </div>
+// </section>
+
+@use 'glass-effect' as *;
+
 .editor-container {
     margin: var(--space-md) var(--space-3xl);
     border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
@@ -41,13 +55,9 @@
 }
 
 .ql-toolbar.ql-snow {
-    background: var(--color-glass-bg) !important;
-    backdrop-filter: var(--blur-default) !important;
-    -webkit-backdrop-filter: var(--blur-default) !important;
-    border: var(--border-default) !important;
-    box-shadow: var(--shadow-glass) !important;
+    @include glass-effect;
+
     border-radius: var(--radius-sm);
-    // margin: 0 var(--space-3xl);
     z-index: 1;
 }
 

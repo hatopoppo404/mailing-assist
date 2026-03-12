@@ -1,0 +1,47 @@
+@mixin table {
+    & th {
+        padding: var(--space-sm);
+        background-color: var(--color-container);
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    & tr {
+        // & td:first-child {
+        //     padding-left: var(--space-sm);
+        // }
+
+        &:not(:last-child) td {
+            border-bottom: var(--border-default);
+        }
+
+        &:first-child td:first-child {
+            border-top-left-radius: var(--radius-md);
+        }
+
+        &:first-child td:last-child {
+            border-top-right-radius: var(--radius-md);
+        }
+
+        &:last-child td:first-child {
+            border-bottom-left-radius: var(--radius-md);
+        }
+
+        &:last-child td:last-child {
+            border-bottom-right-radius: var(--radius-md);
+        }
+    }
+
+    & td {
+        vertical-align: middle;
+        background-color: var(--color-wrapper);
+        padding: var(--space-sm);
+        width: fit-content;
+    }
+}
+
+.table__one-column {
+    @include table;
+
+}

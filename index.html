@@ -17,17 +17,22 @@
 </head>
 
 <body style="background-color: aquamarine;">
-    <section class="editor-container">
-        <div class="subject-container">
-            <input type="text" class="subject-input" id="subject-input" placeholder="件名を入力してください（例：{{company}}様へのお知らせ）">
-        </div>
-        <div class="editor-wrapper">
-            <div id="editor">
-                <p>ここにメール本文を書いてください。</p>
-                <p>宛先ごとに変えたい部分は <strong>{{名前}}</strong> のように設定できます。</p>
-            </div>
-        </div>
-    </section>
+    <div class="table-container">
+        <table class="table__one-column">
+            <thead>
+                <th>ヘッダー</th>
+                <th></th>
+            </thead>
+            <tr>
+                <td>A1</td>
+                <td>B1</td>
+            </tr>
+            <tr>
+                <td>A2</td>
+                <td>B2</td>
+            </tr>
+        </table>
+    </div>
 
     <div id="customAlert" class="customAlert modal-overlay">
         <div class="modal-content">
