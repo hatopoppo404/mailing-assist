@@ -123,10 +123,10 @@
     align-items: center;
     width: fit-content;
     height: auto;
-    padding: 0;
+    padding: calc(var(--space-sm) / 2);
 
     background: none;
-    background-color: var(--color-btn-hover);
+    background-color: var(--color-container);
     border: var(--boder-default);
     border-radius: var(--radius-full);
     outline: none;
@@ -141,7 +141,7 @@
         aspect-ratio: 1 / 1;
         padding: var(--space-lg);
 
-        background-color: var(--color-container);
+        background-color: var(--color-wrapper);
         border-radius: var(--radius-full);
         transition: transform 0.3s ease;
 

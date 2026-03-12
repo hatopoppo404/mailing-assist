@@ -166,6 +166,7 @@ body {
   font-size: var(--font-size-default);
   font: 400;
   color: var(--color-text__dark);
+  line-height: 1.5rem;
 }
 
 h1 {
@@ -505,9 +506,9 @@ h3 {
   width: -moz-fit-content;
   width: fit-content;
   height: auto;
-  padding: 0;
+  padding: calc(var(--space-sm) / 2);
   background: none;
-  background-color: var(--color-btn-hover);
+  background-color: var(--color-container);
   border: var(--boder-default);
   border-radius: var(--radius-full);
   outline: none;
@@ -522,7 +523,7 @@ h3 {
   height: auto;
   aspect-ratio: 1/1;
   padding: var(--space-lg);
-  background-color: var(--color-container);
+  background-color: var(--color-wrapper);
   border-radius: var(--radius-full);
   transition: transform 0.3s ease;
 }
@@ -820,4 +821,60 @@ textarea,
 .modal-overlay.is-open .overlay-editer {
   transform: translateY(0);
   opacity: 1;
+}
+
+.container__card--mail-template.selected {
+  border: var(--border-default);
+}
+
+.container__card--mail-template {
+  width: 280px;
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  margin: var(--space-sm);
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  grid-template-areas: "icon main-text" "preview preview";
+  gap: var(--space-md);
+}
+.container__card--mail-template .wrapper-icon {
+  width: 60px;
+  aspect-ratio: 1/1;
+  background-color: var(--color-container);
+  border-radius: var(--radius-full);
+  grid-area: icon;
+}
+.container__card--mail-template .wrapper-text h2, .container__card--mail-template .wrapper-text p {
+  margin-right: var(--space-sm);
+  width: 100%;
+  white-space: nowrap;
+  /* 1. 折り返しを禁止して1行にする */
+  overflow: hidden;
+  /* 2. はみ出た部分を隠す */
+  text-overflow: ellipsis;
+  /* 3. はみ出た部分を「...」にする */
+}
+.container__card--mail-template .wrapper-text {
+  height: 100%;
+  grid-area: main-text;
+  place-items: center start;
+  display: grid;
+}
+.container__card--mail-template .wrapper-text span {
+  padding: 0.2rem 0.6rem;
+  margin-right: 0.4rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-container);
+}
+.container__card--mail-template .preview-body {
+  grid-area: preview;
+  display: -webkit-box;
+  /* 必須：特殊なボックスモデルを使う */
+  -webkit-box-orient: vertical;
+  /* 必須：垂直方向に並べる */
+  -webkit-line-clamp: 2;
+  /* 表示したい行数を指定（ここでは2行） */
+  overflow: hidden;
+  /* はみ出た分を隠す */
+  padding: 0 var(--space-sm);
 }/*# sourceMappingURL=style.css.map */
