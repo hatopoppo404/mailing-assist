@@ -13,11 +13,6 @@
 // </button>
 
 @mixin btn {
-    background: none;
-    border: none;
-    outline: none;
-    padding: 0;
-
     border-radius: var(--radius-full);
     padding: var(--padding-default);
     border: var(--boder-default);
@@ -35,6 +30,14 @@
     &:focus:not(:focus-visible) {
         outline: none;
     }
+}
+
+button {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
 }
 
 @mixin btn-hover {
@@ -130,7 +133,6 @@
     border: var(--boder-default);
     border-radius: var(--radius-full);
     outline: none;
-    cursor: pointer;
 
     & .wrapper-icon {
         display: flex;
@@ -188,7 +190,7 @@
         }
 
         & > .wrapper-icon + span {
-            max-width: 120px;
+            max-width: 500px;
             margin-left: 1px;
             margin-right: 16px;
             opacity: 1;

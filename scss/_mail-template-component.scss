@@ -6,11 +6,11 @@
  }
 
  .container__card--mail-template {
-     width: 280px;
-
+     //  min-width: 200px;
      padding: var(--space-sm);
      border-radius: var(--radius-md);
-     margin: var(--space-sm);
+     margin: var(--space-sm) 0;
+     cursor: pointer;
 
      display: grid;
      grid-template-columns: 60px 1fr;
@@ -30,17 +30,13 @@
 
      & .wrapper-text {
 
-         & h2,
-         & p {
+         & * {
              margin-right: var(--space-sm);
              width: 100%;
 
              white-space: nowrap;
-             /* 1. 折り返しを禁止して1行にする */
              overflow: hidden;
-             /* 2. はみ出た部分を隠す */
              text-overflow: ellipsis;
-             /* 3. はみ出た部分を「...」にする */
          }
 
          height: 100%;

@@ -1,0 +1,21 @@
+i {
+    display: flex;
+    align-items: center;
+    width: var(--icon-width);
+    height: 100%;
+    color: currentColor;
+    transition: transform 0.3s;
+
+    & > svg {
+        width: 100%;
+        height: auto;
+
+        & * {
+            fill: var(--icon-fill-default);
+            stroke: currentColor;
+            stroke-width: var(--icon-stroke-width);
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    }
+}

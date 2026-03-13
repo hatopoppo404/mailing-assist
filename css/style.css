@@ -228,17 +228,16 @@ h3 {
 }
 
 html, body {
-  height: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
 }
 
 .primary-body {
   display: grid;
-  grid-template-columns: 400px 1fr;
+  grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr auto;
   grid-template-areas: "header header" "left-side main" "footer footer";
-  gap: var(--space-md);
   min-height: 100vh;
 }
 
@@ -270,10 +269,11 @@ header .logo img {
 }
 
 .container__address-select-area {
-  width: 260px;
+  width: 200px;
   padding: calc(var(--space-2xl) * 2) var(--space-3xl);
   background-color: var(--color-container);
   border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-glass);
 }
 .container__address-select-area .wrapper__address-select-area {
   display: flex;
@@ -311,21 +311,62 @@ main {
   background-color: var(--color-container);
   border-radius: var(--radius-2xl);
   padding: var(--space-2xl);
+  box-shadow: var(--shadow-glass);
   display: grid;
-  grid-template-columns: 400px 1fr;
+  grid-template-columns: minmax(220px, 1fr) 2fr;
   grid-template-areas: "mail-template editer";
   gap: var(--space-sm);
+  position: relative;
 }
 
 .mail-template-select-container {
   background-color: var(--color-wrapper);
   border-radius: var(--radius-xl) 0 0 var(--radius-xl);
-  padding: var(--space-xl);
+  padding: var(--space-3xl);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "head-name slicer" "templates templates";
 }
 
-.btn-save {
-  grid-column: 2/3;
-  justify-self: center;
+.container__mail-template-header {
+  place-self: center start;
+  grid-area: head-name;
+}
+
+.mail-template-select-container .wrapper-btn {
+  border-radius: var(--radius-full);
+  background-color: var(--color-container);
+  width: -moz-fit-content;
+  width: fit-content;
+  aspect-ratio: 1/1;
+  place-self: center end;
+  grid-area: slicer;
+}
+.mail-template-select-container .wrapper-btn button {
+  border-radius: var(--radius-full);
+  padding: var(--space-sm);
+  width: 100%;
+  height: 100%;
+}
+.mail-template-select-container .wrapper-btn i {
+  transform: scale(0.8);
+}
+.mail-template-select-container .wrapper-btn svg * {
+  stroke: var(--color-border);
+}
+
+.wrapper-mail-templates {
+  overflow: hidden;
+  width: -moz-fit-content;
+  width: fit-content;
+  grid-area: templates;
+}
+
+.btn-save-position {
+  position: absolute;
+  right: var(--space-3xl);
+  bottom: var(--space-3xl);
 }
 
 footer {
@@ -375,11 +416,15 @@ footer {
   color: var(--color-text-light);
 }
 
-.btn {
+button {
   background: none;
   border: none;
   outline: none;
   padding: 0;
+  cursor: pointer;
+}
+
+.btn {
   border-radius: var(--radius-full);
   padding: var(--padding-default);
   border: var(--boder-default);
@@ -399,10 +444,6 @@ footer {
 }
 
 .btn-with-icon {
-  background: none;
-  border: none;
-  outline: none;
-  padding: 0;
   border-radius: var(--radius-full);
   padding: var(--padding-default);
   border: var(--boder-default);
@@ -450,10 +491,6 @@ footer {
 }
 
 .btn-cta {
-  background: none;
-  border: none;
-  outline: none;
-  padding: 0;
   border-radius: var(--radius-full);
   padding: var(--padding-default);
   border: var(--boder-default);
@@ -529,7 +566,6 @@ footer {
   border: var(--boder-default);
   border-radius: var(--radius-full);
   outline: none;
-  cursor: pointer;
 }
 .btn-icon-moving-left .wrapper-icon {
   display: flex;
@@ -576,7 +612,7 @@ footer {
   transform: translateX(-2px);
 }
 .btn-icon-moving-left:hover > .wrapper-icon + span {
-  max-width: 120px;
+  max-width: 500px;
   margin-left: 1px;
   margin-right: 16px;
   opacity: 1;
@@ -651,10 +687,6 @@ footer {
   text-align: center;
 }
 .modal__panel button, .modal__panel input, .modal__panel label, .modal__panel li {
-  background: none;
-  border: none;
-  outline: none;
-  padding: 0;
   border-radius: var(--radius-full);
   padding: var(--padding-default);
   border: var(--boder-default);
@@ -1052,10 +1084,10 @@ textarea,
 }
 
 .container__card--mail-template {
-  width: 280px;
   padding: var(--space-sm);
   border-radius: var(--radius-md);
-  margin: var(--space-sm);
+  margin: var(--space-sm) 0;
+  cursor: pointer;
   display: grid;
   grid-template-columns: 60px 1fr;
   grid-template-areas: "icon main-text" "preview preview";
@@ -1068,15 +1100,12 @@ textarea,
   border-radius: var(--radius-full);
   grid-area: icon;
 }
-.container__card--mail-template .wrapper-text h2, .container__card--mail-template .wrapper-text p {
+.container__card--mail-template .wrapper-text * {
   margin-right: var(--space-sm);
   width: 100%;
   white-space: nowrap;
-  /* 1. 折り返しを禁止して1行にする */
   overflow: hidden;
-  /* 2. はみ出た部分を隠す */
   text-overflow: ellipsis;
-  /* 3. はみ出た部分を「...」にする */
 }
 .container__card--mail-template .wrapper-text {
   height: 100%;
@@ -1124,49 +1153,50 @@ textarea,
   display: flex;
   flex-direction: column;
 }
-.container__popover li, .container__popover button {
-  background: none;
-  border: none;
-  outline: none;
+.container__popover ul, .container__popover ol, .container__popover li {
+  list-style: none;
   padding: 0;
+  margin: 0;
+  line-height: 1em;
+}
+.container__popover ul label, .container__popover ul span, .container__popover ol label, .container__popover ol span, .container__popover li label, .container__popover li span {
+  margin: 0;
+  padding: 0;
+}
+.container__popover ul input[type=checkbox], .container__popover ol input[type=checkbox], .container__popover li input[type=checkbox] {
+  -moz-appearance: none;
+       appearance: none;
+  -webkit-appearance: none;
+  background-image: none;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+.container__popover li {
   border-radius: var(--radius-full);
   padding: var(--padding-default);
   border: var(--boder-default);
   background-color: var(--color-container);
   cursor: pointer;
 }
-.container__popover li:hover, .container__popover button:hover {
+.container__popover li:hover {
   box-shadow: var(--shadow-hover);
   transform: scale(1.02);
 }
-.container__popover li:focus, .container__popover button:focus {
+.container__popover li:focus {
   outline: none;
   box-shadow: var(--focus-ring);
 }
-.container__popover li:focus:not(:focus-visible), .container__popover button:focus:not(:focus-visible) {
+.container__popover li:focus:not(:focus-visible) {
   outline: none;
 }
-.container__popover li, .container__popover button {
-  background-color: var(--color-glass-bg);
-  border: var(--border-default);
-  margin: calc(var(--space-sm) / 2) 0;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
+.container__popover li {
+  padding: 0.5em 1rem;
+  margin: 0.5rem auto;
 }
-.container__popover li:has(input[type=checkbox]:checked), .container__popover button:has(input[type=checkbox]:checked) {
+.container__popover li:has(input[type=checkbox]:checked) {
   font-weight: bold;
-}
-.container__popover li input[type=checkbox], .container__popover button input[type=checkbox] {
-  -moz-appearance: none;
-       appearance: none;
-  -webkit-appearance: none;
-  background-image: none;
-  width: 1px;
-  height: 1px;
-  cursor: pointer;
-}
-.container__popover li label, .container__popover button label {
-  cursor: pointer;
 }
 
 .container__popover {
@@ -1178,4 +1208,24 @@ textarea,
 .container__popover:popover-open {
   opacity: 1;
   transform: translateY(0);
+}
+
+i {
+  display: flex;
+  align-items: center;
+  width: var(--icon-width);
+  height: 100%;
+  color: currentColor;
+  transition: transform 0.3s;
+}
+i > svg {
+  width: 100%;
+  height: auto;
+}
+i > svg * {
+  fill: var(--icon-fill-default);
+  stroke: currentColor;
+  stroke-width: var(--icon-stroke-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }/*# sourceMappingURL=style.css.map */
