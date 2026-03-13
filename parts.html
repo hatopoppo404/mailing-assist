@@ -16,6 +16,32 @@
 </head>
 
 <body>
+    <button id="openBtn">開く</button>
+
+    <dialog id="modal" class="modal">
+        <div class="modal__panel">
+            <h2 class="modal__title">確認</h2>
+            <p class="modal__text">この内容で保存する？</p>
+
+            <div class="modal__actions">
+                <button id="okBtn" type="button">OK</button>
+                <button id="cancelBtn" type="button">キャンセル</button>
+            </div>
+        </div>
+    </dialog>
+
+    <div class="user-menu">
+        <button class="user-menu__trigger" popovertarget="userMenu">
+            ユーザー
+        </button>
+
+        <div id="userMenu" popover class="container__popover">
+            <button type="button">プロフィール</button>
+            <button type="button">設定</button>
+            <button type="button">ログアウト</button>
+        </div>
+    </div>
+
     <div class="table-container">
         <table class="table__with-two-cards">
             <tr>

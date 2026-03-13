@@ -1,0 +1,46 @@
+@use 'glass-effect' as *;
+@use 'button-parts' as *;
+
+.anchor-popover__address-sets {
+    anchor-name: --address-sets;
+}
+
+.container__popover {
+    margin: unset;
+    inset: auto;
+    position-area: bottom;
+
+    @include glass-effect;
+    background-color: var(--color-glass-bg);
+    padding: var(--padding-default);
+    border-radius: var(--radius-md);
+
+    display: flex;
+    flex-direction: column;
+
+    & button,
+    & input,
+    & label,
+    & li {
+        @include btn;
+        background-color: var(--color-glass-bg);
+        border: var(--border-default);
+        margin: calc(var(--space-sm) / 2) 0;
+        padding: 0.5rem 1rem;
+        &:has(input[type="checkbox"]:checked){
+            font-weight: bold;
+        }
+
+    }
+}
+
+.container__popover {
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity .15s ease, transform .15s ease;
+}
+
+.container__popover:popover-open {
+    opacity: 1;
+    transform: translateY(0);
+}

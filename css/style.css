@@ -224,16 +224,16 @@ h3 {
   --icon-backspace-width: 20px;
   --icon-stroke-width: 2px;
   --icon-fill-default: none;
-  --blur-default: blur(10px);
+  --blur-default: blur(2px);
 }
 
-body {
+.primary-body {
   display: grid;
   grid-template-columns: 400px 1fr;
   grid-template-areas: "header header" "left-side main" "footer footer";
   gap: var(--space-md);
 }
-body header {
+.primary-body header {
   grid-area: header;
   place-self: center;
   padding: var(--space-xl);
@@ -241,7 +241,7 @@ body header {
   width: calc(100% - var(--space-md) * 2);
   border-bottom: var(--border-default);
 }
-body {
+.primary-body {
   background-color: var(--color-danger);
 }
 
@@ -281,99 +281,9 @@ body {
   box-shadow: var(--shadow-glass);
   backdrop-filter: var(--blur-default);
   border: var(--border-default);
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  visibility: hidden;
-  transition: background-color 100ms, visibility 100ms;
-  pointer-events: none;
-}
-
-.modal-overlay.is-open {
-  background-color: var(--color-overlay);
-  visibility: visible;
-  pointer-events: auto;
-}
-
-.modal-overlay.is-open .modal-content {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.modal-content {
-  transform: translateY(10px);
-  opacity: 0;
-  transition: transform 100ms ease-out, opacity 100ms ease-out;
-  background: var(--color-glass-bg);
-  box-shadow: var(--shadow-glass);
-  backdrop-filter: var(--blur-default);
-  border: var(--border-default);
-  color: var(--color-text__light);
-  padding: var(--space-xl);
-  border-radius: var(--radius-xl);
-  min-width: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-xl);
-}
-
-.alertTitle,
-.confirmTitle {
-  color: var(--color-text__light);
-  width: 100%;
-  border-bottom: var(--border-default);
-  padding-bottom: 0.7rem;
-  text-align: center;
-}
-
-.alertMessage,
-.confirmMessage {
-  color: var(--color-border);
-  width: 100%;
-  margin: 20px 0;
-  text-align: center;
-}
-
-.alertClose,
-.confirmOk,
-.confirmCancel {
   padding: var(--padding-default);
-  background: var(--color-glass-bg);
-  color: var(--color-text__light);
-  border: var(--border-default);
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  text-align: center;
-}
-
-.alertClose:hover,
-.confirmOk:hover,
-.confirmCancel:hover {
-  box-shadow: var(--shadow-hover);
-  transform: scale(1.02);
-}
-
-.alertClose:focus,
-.confirmOk:focus,
-.confirmCancel:focus {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
-
-.confirmBtn {
-  display: flex;
-  gap: var(--space-xl);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-light);
 }
 
 .btn {
@@ -584,6 +494,203 @@ body {
   transform: translateX(0);
 }
 
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-8px);
+  }
+  50% {
+    transform: translateX(8px);
+  }
+  75% {
+    transform: translateX(-8px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.shake-animation {
+  animation: shake 0.3s ease-in-out;
+}
+
+.modal {
+  border: none;
+  padding: var(--space-xl);
+  background: transparent;
+  max-width: none;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.modal[open] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.modal__panel {
+  background: var(--color-glass-bg);
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: var(--blur-default);
+  border: var(--border-default);
+  padding: var(--padding-default);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-light);
+  margin: auto;
+  width: min(300px, 100vw - 32px);
+}
+.modal__panel .modal__title {
+  color: var(--color-text__light);
+  width: 100%;
+  border-bottom: var(--border-default);
+  padding-bottom: 0.7rem;
+  text-align: center;
+}
+.modal__panel .modal__text {
+  color: var(--color-border);
+  width: 100%;
+  margin: 20px 0;
+  text-align: center;
+}
+.modal__panel button, .modal__panel input, .modal__panel label, .modal__panel li {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  border-radius: var(--radius-full);
+  padding: var(--padding-default);
+  border: var(--boder-default);
+  background-color: var(--color-container);
+  cursor: pointer;
+}
+.modal__panel button:hover, .modal__panel input:hover, .modal__panel label:hover, .modal__panel li:hover {
+  box-shadow: var(--shadow-hover);
+  transform: scale(1.02);
+}
+.modal__panel button:focus, .modal__panel input:focus, .modal__panel label:focus, .modal__panel li:focus {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+.modal__panel button:focus:not(:focus-visible), .modal__panel input:focus:not(:focus-visible), .modal__panel label:focus:not(:focus-visible), .modal__panel li:focus:not(:focus-visible) {
+  outline: none;
+}
+.modal__panel button, .modal__panel input, .modal__panel label, .modal__panel li {
+  background-color: var(--color-glass-bg);
+  border: var(--border-default);
+  margin: calc(var(--space-sm) / 2) 0;
+  padding: 0.5rem 1rem;
+  color: var(--color-text__light);
+}
+.modal__panel .modal__actions {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-xl);
+  justify-content: center;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  visibility: hidden;
+  transition: background-color 100ms, visibility 100ms;
+  pointer-events: none;
+}
+
+.modal-overlay.is-open {
+  background-color: var(--color-overlay);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.modal-overlay.is-open .modal-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.modal-content {
+  transform: translateY(10px);
+  opacity: 0;
+  transition: transform 100ms ease-out, opacity 100ms ease-out;
+  background: var(--color-glass-bg);
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: var(--blur-default);
+  border: var(--border-default);
+  padding: var(--padding-default);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-light);
+  color: var(--color-text__light);
+  padding: var(--space-xl);
+  border-radius: var(--radius-xl);
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.alertTitle,
+.confirmTitle {
+  color: var(--color-text__light);
+  width: 100%;
+  border-bottom: var(--border-default);
+  padding-bottom: 0.7rem;
+  text-align: center;
+}
+
+.alertMessage,
+.confirmMessage {
+  color: var(--color-border);
+  width: 100%;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.alertClose,
+.confirmOk,
+.confirmCancel {
+  padding: var(--padding-default);
+  background: var(--color-glass-bg);
+  color: var(--color-text__light);
+  border: var(--border-default);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  text-align: center;
+}
+
+.alertClose:hover,
+.confirmOk:hover,
+.confirmCancel:hover {
+  box-shadow: var(--shadow-hover);
+  transform: scale(1.02);
+}
+
+.alertClose:focus,
+.confirmOk:focus,
+.confirmCancel:focus {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.confirmBtn {
+  display: flex;
+  gap: var(--space-xl);
+}
+
 body {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -661,6 +768,9 @@ textarea,
   box-shadow: var(--shadow-glass);
   backdrop-filter: var(--blur-default);
   border: var(--border-default);
+  padding: var(--padding-default);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-light);
   border-radius: var(--radius-sm);
   z-index: 1;
 }
@@ -812,6 +922,9 @@ textarea,
   box-shadow: var(--shadow-glass);
   backdrop-filter: var(--blur-default);
   border: var(--border-default);
+  padding: var(--padding-default);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-light);
   transform: translateY(10px);
   opacity: 0;
   transition: transform 100ms ease-out, opacity 100ms ease-out;
@@ -895,4 +1008,68 @@ textarea,
   overflow: hidden;
   /* はみ出た分を隠す */
   padding: 0 var(--space-sm);
+}
+
+.anchor-popover__address-sets {
+  anchor-name: --address-sets;
+}
+
+.container__popover {
+  margin: unset;
+  inset: auto;
+  position-area: bottom;
+  background: var(--color-glass-bg);
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: var(--blur-default);
+  border: var(--border-default);
+  padding: var(--padding-default);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-light);
+  background-color: var(--color-glass-bg);
+  padding: var(--padding-default);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+}
+.container__popover button, .container__popover input, .container__popover label, .container__popover li {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  border-radius: var(--radius-full);
+  padding: var(--padding-default);
+  border: var(--boder-default);
+  background-color: var(--color-container);
+  cursor: pointer;
+}
+.container__popover button:hover, .container__popover input:hover, .container__popover label:hover, .container__popover li:hover {
+  box-shadow: var(--shadow-hover);
+  transform: scale(1.02);
+}
+.container__popover button:focus, .container__popover input:focus, .container__popover label:focus, .container__popover li:focus {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+.container__popover button:focus:not(:focus-visible), .container__popover input:focus:not(:focus-visible), .container__popover label:focus:not(:focus-visible), .container__popover li:focus:not(:focus-visible) {
+  outline: none;
+}
+.container__popover button, .container__popover input, .container__popover label, .container__popover li {
+  background-color: var(--color-glass-bg);
+  border: var(--border-default);
+  margin: calc(var(--space-sm) / 2) 0;
+  padding: 0.5rem 1rem;
+}
+.container__popover button:has(input[type=checkbox]:checked), .container__popover input:has(input[type=checkbox]:checked), .container__popover label:has(input[type=checkbox]:checked), .container__popover li:has(input[type=checkbox]:checked) {
+  font-weight: bold;
+}
+
+.container__popover {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.container__popover:popover-open {
+  opacity: 1;
+  transform: translateY(0);
 }/*# sourceMappingURL=style.css.map */

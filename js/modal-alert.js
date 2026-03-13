@@ -1,3 +1,22 @@
+export function initModal() {
+    const modal = document.getElementById('modal')
+    const openBtn = document.getElementById('openBtn')
+    const cancelBtn = document.getElementById('cancelBtn')
+
+    openBtn.addEventListener('click', () => {
+        modal.showModal()
+    })
+
+    cancelBtn.addEventListener('click', () => {
+        modal.close()
+    })
+}
+
+
+
+
+
+
 // アラート
 export function showAlert(title, message) {
     document.getElementById('alertTitle').innerText = title;

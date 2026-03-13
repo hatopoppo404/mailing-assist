@@ -3,6 +3,9 @@
     box-shadow: var(--shadow-glass);
     backdrop-filter: var(--blur-default);
     border: var(--border-default);
+    padding: var(--padding-default);
+    border-radius: var(--radius-lg);
+    color: var(--color-text-light);
 }
 
 .glass-effect {

@@ -17,7 +17,125 @@
 // </div>
 
 @use 'glass-effect' as *;
-// 「*（すべて）」として読み込む
+@use 'button-parts' as *;
+
+@mixin title {
+    color: var(--color-text__light);
+    width: 100%;
+    border-bottom: var(--border-default);
+    padding-bottom: 0.7rem;
+    text-align: center;
+}
+
+@mixin message {
+    color: var(--color-border);
+    width: 100%;
+    margin: 20px 0;
+    text-align: center;
+}
+
+@mixin button {
+    padding: var(--padding-default);
+    background: var(--color-glass-bg);
+    color: var(--color-text__light);
+    border: var(--border-default);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    text-align: center;
+}
+
+@mixin button-hover {
+    box-shadow: var(--shadow-hover);
+    transform: scale(1.02);
+}
+
+@mixin button-focus {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    50% {
+        transform: translateX(8px);
+    }
+
+    75% {
+        transform: translateX(-8px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.shake-animation {
+    animation: shake 0.3s ease-in-out;
+}
+
+
+.modal {
+    border: none;
+    padding: var(--space-xl);
+    background: transparent;
+    max-width: none;
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.modal[open] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.modal::backdrop {
+    background: rgb(0 0 0 / 0.45);
+}
+
+.modal__panel {
+    @include glass-effect;
+    margin: auto;
+    width: min(300px, calc(100vw - 32px));
+
+    & .modal__title {
+        @include title;
+    }
+
+    & .modal__text {
+        @include message;
+    }
+
+    & button,
+    & input,
+    & label,
+    & li {
+        @include btn;
+        background-color: var(--color-glass-bg);
+        border: var(--border-default);
+        margin: calc(var(--space-sm) / 2) 0;
+        padding: 0.5rem 1rem;
+        color: var(--color-text__light);
+
+    }
+
+    & .modal__actions {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: var(--space-xl);
+        justify-content: center;
+    }
+}
 
 // ーーーーーーーーーー背景ーーーーーーーーーーーーーーー
 .modal-overlay {
@@ -66,41 +184,6 @@
 }
 
 // ーーーーーーーーーーパーツーーーーーーーーーーーーーーー
-
-@mixin title {
-    color: var(--color-text__light);
-    width: 100%;
-    border-bottom: var(--border-default);
-    padding-bottom: 0.7rem;
-    text-align: center;
-}
-
-@mixin message {
-    color: var(--color-border);
-    width: 100%;
-    margin: 20px 0;
-    text-align: center;
-}
-
-@mixin button {
-    padding: var(--padding-default);
-    background: var(--color-glass-bg);
-    color: var(--color-text__light);
-    border: var(--border-default);
-    border-radius: var(--radius-full);
-    cursor: pointer;
-    text-align: center;
-}
-
-@mixin button-hover {
-    box-shadow: var(--shadow-hover);
-    transform: scale(1.02);
-}
-
-@mixin button-focus {
-    outline: none;
-    box-shadow: var(--focus-ring);
-}
 
 
 .alertTitle,
