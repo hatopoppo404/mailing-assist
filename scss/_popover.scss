@@ -18,23 +18,37 @@
     display: flex;
     flex-direction: column;
 
-    & button,
-    & input,
-    & label,
-    & li {
+    & li,
+    & button {
         @include btn;
         background-color: var(--color-glass-bg);
         border: var(--border-default);
         margin: calc(var(--space-sm) / 2) 0;
         padding: 0.5rem 1rem;
-        &:has(input[type="checkbox"]:checked){
+        cursor: pointer;
+
+        &:has(input[type="checkbox"]:checked) {
             font-weight: bold;
+        }
+
+        & input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: none;
+            width: 1px;
+            height: 1px;
+            cursor: pointer;
+        }
+
+        & label {
+            cursor: pointer;
         }
 
     }
 }
 
 .container__popover {
+    // display: none;
     opacity: 0;
     transform: translateY(-4px);
     transition: opacity .15s ease, transform .15s ease;

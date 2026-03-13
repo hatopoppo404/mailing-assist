@@ -1,4 +1,6 @@
 @mixin table {
+    width: 100%;
+    
     & th {
         padding: var(--space-sm);
         position: sticky;
@@ -8,24 +10,6 @@
     }
 
     & tr {
-        // &:not(:last-child) td {
-        //     // border-bottom: var(--border-default);
-        //     position: relative;
-        //     /* 線の基準点 */
-
-        //     &::after {
-        //         content: "";
-        //         position: absolute;
-        //         bottom: 0;
-        //         left: 50%;
-        //         transform: translateX(-50%);
-
-        //         width: calc(100% - var(--space-sm));
-        //         height: 1px;
-        //         background-color: var(--color-border);
-        //     }
-        // }
-
         &:not(:last-child) {
             position: relative;
             /* 1. 基準を定義 */

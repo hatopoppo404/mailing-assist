@@ -13,11 +13,10 @@
 @use 'glass-effect' as *;
 
 .editor-container {
-    margin: var(--space-md) var(--space-3xl);
+    // margin: var(--space-md) var(--space-3xl);
     border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
     background-color: var(--color-wrapper);
     padding: var(--space-3xl);
-    height: 100%;
 
     display: flex;
     flex-direction: column;

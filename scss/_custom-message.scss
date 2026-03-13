@@ -91,6 +91,10 @@
     transition:
         opacity 0.2s ease,
         transform 0.2s ease;
+
+    &.okOnly #modal__cancel {
+        display: none;
+    }
 }
 
 .modal[open] {
@@ -134,7 +138,9 @@
         flex-direction: row;
         gap: var(--space-xl);
         justify-content: center;
+
     }
+
 }
 
 // ーーーーーーーーーー背景ーーーーーーーーーーーーーーー

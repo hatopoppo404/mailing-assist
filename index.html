@@ -17,34 +17,159 @@
 
 <body class="primary-body">
     <header>
-        <h1 class="test02">
-            aaaaaaa
-        </h1>
         <div class="logo">
             <img src="img/logo.svg" alt="logo">
         </div>
     </header>
-    <main>
-
-    </main>
-
-    <div id="customAlert" class="customAlert modal-overlay">
-        <div class="modal-content">
-            <h2 id="alertTitle" class="alertTitle">確認</h2>
-            <p id="alertMessage" class="alertMessage">メッセージ</p>
-            <button id="alertClose" class="alertClose">OK</button>
-        </div>
-    </div>
-    <div id="customConfirm" class="customConfirm modal-overlay">
-        <div class="modal-content">
-            <h2 id="confirmTitle" class="confirmTitle">確認</h2>
-            <p id="confirmMessage" class="confirmMessage">メッセージ</p>
-            <div class="confirmBtn">
-                <button id="confirmOk" class="confirmOk">OK</button>
-                <button id="confirmCancel" class="confirmCancel">Cancel</button>
+    <aside class="left-side">
+        <div class="container-btn">
+            <div class="wrapper-btn">
+                <button class="btn-cta">
+                    <div class="wrapper-icon">
+                        <i class="icon-download" aria-hidden="true">
+                            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M38 26V34C38 35.0609 37.5786 36.0783 36.8284 36.8284C36.0783 37.5786 35.0609 38 34 38H6C4.93913 38 3.92172 37.5786 3.17157 36.8284C2.42143 36.0783 2 35.0609 2 34V26M10 16L20 26M20 26L30 16M20 26V2" />
+                            </svg>
+                        </i>
+                    </div>
+                    <span>メールを作成する</span>
+                </button>
             </div>
         </div>
-    </div>
+        <div class="container__address-select-area">
+            <div class="wrapper__address-select-area">
+                <div class="container__selected-address-sets">
+                    <h3>
+                        <span>宛先</span><span><span id="selected-count">0</span>件</span>
+                    </h3>
+                    <table class="selected-address-sets table__one-column">
+                        <tbody>
+                            <tr>
+                                <td colspan="2">宛先を選択してください</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="container-btn">
+                    <div class="wrapper-btn">
+                        <button class="btn-icon-moving-left .anchor-popover__address-sets select-btn__address-sets"
+                            popovertarget="menu__address-sets" id="select-btn__address-sets">
+                            <div class="wrapper-icon">
+                                <i class="icon-plus" aria-hidden="true">
+                                    <svg viewBox="0 0 31 31" xmlns="http://www.w3.org/2000/svg">
+                                        <line x1="16" y1="10" x2="16" y2="22" />
+                                        <line x1="10" y1="16" x2="22" y2="16" />
+                                    </svg>
+                                </i>
+                            </div>
+                            <span>宛先を追加する</span>
+                        </button>
+                    </div>
+                </div>
+                <div id="menu__address-sets" popover class="container__popover">
+                    <ul>
+                        <li>
+                            <label for="">
+                                <input type="checkbox" name="" id="">
+                                選択肢1
+                            </label>
+                        </li>
+                        <li>
+                            <label for="">
+                                <input type="checkbox" name="" id="">
+                                選択肢2
+                            </label>
+                        </li>
+                        <li>
+                            <label for="">
+                                <input type="checkbox" name="" id="">
+                                選択肢3
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container-btn">
+            <div class="wrapper-btn">
+                <button class="btn-icon-moving-left">
+                    <div class="wrapper-icon">
+                        <i class="icon-user" aria-hidden="true">
+                            <svg viewBox="0 0 26 25" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="13" cy="6.25" r="5.25" />
+                                <path
+                                    d="M13 14.5C17.7433 14.5 23.8667 16.5614 24.6513 18.5708C25.4359 20.5802 24.6513 23.125 24.6513 23.125H1.34874C1.34874 23.125 0.564144 20.5802 1.34874 18.5708C2.13333 16.5614 8.25679 14.5 13 14.5Z" />
+                            </svg>
+                        </i>
+                    </div>
+                    <span>宛先リストを編集する</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+    <main>
+        <div class="container-main">
+            <section class="mail-template-select-container">
+                <div class="container__mail-template-header">
+                    <h3>テンプレート選択</h3>
+                    <button>
+                        <i class="icon-slicer" aria-hidden="true">
+                            <svg viewBox="0 0 18 10" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1H17" />
+                                <path d="M3 5H15" />
+                                <path d="M4 9H14" />
+                            </svg>
+                        </i>
+                    </button>
+                </div>
+            </section>
+            <section class="editor-container">
+                <div class="subject-container">
+                    <input type="text" class="subject-input" id="subject-input"
+                        placeholder="件名を入力してください（例：{{company}}様へのお知らせ）">
+                </div>
+                <div class="editor-wrapper">
+                    <div id="editor">
+                        <p>ここにメール本文を書いてください。</p>
+                        <p>宛先ごとに変えたい部分は <strong>{{名前}}</strong> のように設定できます。</p>
+                    </div>
+                </div>
+            </section>
+            <div class="wrapper-btn btn-save">
+                <button class="btn-icon-moving-left">
+                    <div class="wrapper-icon">
+                        <i class="icon-save" aria-hidden="true">
+                            <svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M19.6667 25V14.3333H6.33333V25M6.33333 1V7.66667H17M22.3333 25H3.66667C2.95942 25 2.28115 24.719 1.78105 24.219C1.28095 23.7189 1 23.0406 1 22.3333V3.66667C1 2.95942 1.28095 2.28115 1.78105 1.78105C2.28115 1.28095 2.95942 1 3.66667 1H18.3333L25 7.66667V22.3333C25 23.0406 24.719 23.7189 24.219 24.219C23.7189 24.719 23.0406 25 22.3333 25Z"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </i>
+                    </div>
+                    <span>テンプレート保存する</span>
+                </button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <small>&copy; 2026 Shimamura Yusuke.</small>
+    </footer>
+
+    <!-- モーダル表示用 -->
+    <dialog id="modal" class="modal">
+        <div class="modal__panel" id="modal__panel">
+            <h2 class="modal__title" id="modal__title">タイトル</h2>
+            <p class="modal__text" id="modal__text">メッセージ内容が入ります</p>
+
+            <div class="modal__actions">
+                <button id="modal__ok" type="button">OK</button>
+                <button id="modal__cancel" type="button">キャンセル</button>
+            </div>
+        </div>
+    </dialog>
+    <!-- モーダルここまで -->
 </body>
 
 </html>
