@@ -130,15 +130,13 @@ main {
 
 // right side
 // ----------------------------
-.btn-save {
-    grid-column: 2 / 3;
-    justify-self: center;
+.wrapper-btn.btn-save {
+    position: absolute;
+    right: var(--space-3xl);
+    bottom: var(--space-3xl);
 
-    // position: absolute;
-    // right: calc(var(--space-3xl));
-    // bottom: var(--space-3xl);
-
-    // width: max-content;
+    display: inline-flex;
+    width: max-content !important;
 }
 
 // =======================================
