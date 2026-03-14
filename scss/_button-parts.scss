@@ -186,13 +186,13 @@ button {
 
     &:hover {
         & > .wrapper-icon {
-            transform: translateX(-2px);
+            transform: translateX(-0.5px);
         }
 
         & > .wrapper-icon + span {
             max-width: 500px;
-            margin-left: 1px;
-            margin-right: 16px;
+            margin-left: 0.4em;
+            margin-right: 1.6em;
             opacity: 1;
             transform: translateX(0);
         }

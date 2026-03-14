@@ -6,21 +6,20 @@
  }
 
  .container__card--mail-template {
-     //  min-width: 200px;
      padding: var(--space-sm);
      border-radius: var(--radius-md);
      margin: var(--space-sm) 0;
      cursor: pointer;
 
      display: grid;
-     grid-template-columns: 60px 1fr;
+     grid-template-columns: 48px 1fr;
      grid-template-areas:
          "icon main-text"
          "preview preview";
      gap: var(--space-md);
 
      & .wrapper-icon {
-         width: 60px;
+         width: 100%;
          aspect-ratio: 1 / 1;
          background-color: var(--color-container);
          border-radius: var(--radius-full);

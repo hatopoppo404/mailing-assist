@@ -228,7 +228,7 @@ h3 {
 }
 
 html, body {
-  height: 100vh;
+  height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -238,7 +238,9 @@ html, body {
   grid-template-columns: auto 1fr;
   grid-template-rows: auto minmax(0, 1fr) auto;
   grid-template-areas: "header header" "left-side main" "footer footer";
-  min-height: 100vh;
+  height: 100%;
+  min-height: 0;
+  row-gap: var(--space-xl);
 }
 
 header {
@@ -246,8 +248,7 @@ header {
   place-self: center;
   width: calc(100% - var(--space-xl) * 4);
   border-bottom: var(--border-default);
-  padding: var(--space-xl);
-  margin-bottom: var(--space-xl);
+  padding: var(--space-sm);
 }
 header .logo {
   width: -moz-fit-content;
@@ -255,7 +256,7 @@ header .logo {
   margin: 0 auto;
 }
 header .logo img {
-  width: 200px;
+  width: 160px;
   height: auto;
 }
 
@@ -281,7 +282,17 @@ header .logo img {
   gap: var(--space-xl);
 }
 .container__address-select-area .wrapper__address-select-area h3 {
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 var(--space-sm);
+}
+.container__address-select-area .wrapper__address-select-area #selected-count {
+  font-size: 1.1em;
+}
+.container__address-select-area .table-container {
+  max-height: 200px;
+  border-radius: var(--radius-md);
 }
 
 .container-btn {
@@ -314,11 +325,11 @@ main {
   box-shadow: var(--shadow-glass);
   display: grid;
   grid-template-columns: minmax(220px, 1fr) 2fr;
-  grid-template-rows: minmax(300px, 1fr);
+  grid-template-rows: minmax(0, 1fr);
   grid-template-areas: "mail-template editer";
   gap: var(--space-sm);
   position: relative;
-  height: 100%;
+  height: calc(100% - var(--space-xl) * 2);
   min-height: 0;
 }
 
@@ -327,11 +338,12 @@ main {
   border-radius: var(--radius-xl) 0 0 var(--radius-xl);
   padding: var(--space-3xl);
   min-height: 0;
-  height: 100%;
   display: grid;
   grid-template-columns: 1fr auto;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto minmax(0, 1fr);
   grid-template-areas: "head-name slicer" "templates templates";
+  gap: var(--space-sm);
+  overflow: hidden;
 }
 
 .container__mail-template-header {
@@ -350,12 +362,12 @@ main {
 }
 .mail-template-select-container .wrapper-btn button {
   border-radius: var(--radius-full);
-  padding: var(--space-sm);
+  padding: calc(var(--space-sm) / 2);
   width: 100%;
   height: 100%;
 }
 .mail-template-select-container .wrapper-btn i {
-  transform: scale(0.8);
+  transform: scale(0.7);
 }
 .mail-template-select-container .wrapper-btn svg * {
   stroke: var(--color-border);
@@ -364,7 +376,7 @@ main {
 .wrapper-mail-templates {
   height: 100%;
   min-height: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   width: 100%;
   grid-area: templates;
 }
@@ -379,37 +391,49 @@ footer {
   grid-area: footer;
   padding: var(--space-md);
   margin: auto;
+  z-index: 1;
 }
 
 .custom-scrollbar__y {
-  overflow: scroll;
+  overflow: auto;
+}
+.custom-scrollbar__y::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scrollbar__y::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar__y::-webkit-scrollbar-thumb {
+  background: rgba(174, 174, 174, 0.1);
+  backdrop-filter: var(--blur-default);
+  border-radius: var(--radius-full);
+}
+.custom-scrollbar__y::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+.custom-scrollbar__y {
   overflow-x: hidden;
 }
 
 .custom-scrollbar__x {
-  overflow: scroll;
-  overflow-y: hidden;
+  overflow: auto;
 }
-
-.custom-scrollbar__y::-webkit-scrollbar,
 .custom-scrollbar__x::-webkit-scrollbar {
   width: 8px;
 }
-
-.custom-scrollbar__y::-webkit-scrollbar-track,
 .custom-scrollbar__x::-webkit-scrollbar-track {
   background: transparent;
 }
-
-.custom-scrollbar__y::-webkit-scrollbar-thumb,
 .custom-scrollbar__x::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  background: rgba(174, 174, 174, 0.1);
+  backdrop-filter: var(--blur-default);
+  border-radius: var(--radius-full);
 }
-
-.custom-scrollbar__y::-webkit-scrollbar-thumb:hover,
 .custom-scrollbar__x::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.2);
+}
+.custom-scrollbar__x {
+  overflow-y: hidden;
 }
 
 .glass-effect {
@@ -615,12 +639,12 @@ button {
   transition: max-width 0.3s, margin-left 0.3s, opacity 0.2s, transform 0.3s;
 }
 .btn-icon-moving-left:hover > .wrapper-icon {
-  transform: translateX(-2px);
+  transform: translateX(-0.5px);
 }
 .btn-icon-moving-left:hover > .wrapper-icon + span {
   max-width: 500px;
-  margin-left: 1px;
-  margin-right: 16px;
+  margin-left: 0.4em;
+  margin-right: 1.6em;
   opacity: 1;
   transform: translateX(0);
 }
@@ -909,8 +933,26 @@ textarea,
   color: var(--color-text__dark);
   flex-grow: 1;
   height: 100%;
+  overflow: hidden;
 }
 
+.ql-editor {
+  overflow: auto;
+}
+.ql-editor::-webkit-scrollbar {
+  width: 8px;
+}
+.ql-editor::-webkit-scrollbar-track {
+  background: transparent;
+}
+.ql-editor::-webkit-scrollbar-thumb {
+  background: rgba(174, 174, 174, 0.1);
+  backdrop-filter: var(--blur-default);
+  border-radius: var(--radius-full);
+}
+.ql-editor::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
 .ql-editor {
   font-size: var(--font-size-default);
 }
@@ -952,6 +994,11 @@ textarea,
 
 .ql-snow .ql-fill {
   fill: var(--color-primary-1) !important;
+}
+
+.table-flame {
+  border-radius: var(--radius-md);
+  background-color: var(--color-wrapper);
 }
 
 .table__one-column {
@@ -1095,12 +1142,12 @@ textarea,
   margin: var(--space-sm) 0;
   cursor: pointer;
   display: grid;
-  grid-template-columns: 60px 1fr;
+  grid-template-columns: 48px 1fr;
   grid-template-areas: "icon main-text" "preview preview";
   gap: var(--space-md);
 }
 .container__card--mail-template .wrapper-icon {
-  width: 60px;
+  width: 100%;
   aspect-ratio: 1/1;
   background-color: var(--color-container);
   border-radius: var(--radius-full);

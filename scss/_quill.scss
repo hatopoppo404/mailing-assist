@@ -11,6 +11,7 @@
 // </section>
 
 @use 'glass-effect' as *;
+@use 'custom-scrollbar' as *;
 
 .editor-container {
     // margin: var(--space-md) var(--space-3xl);
@@ -66,9 +67,11 @@
     color: var(--color-text__dark);
     flex-grow: 1;
     height: 100%;
+    overflow: hidden;
 }
 
 .ql-editor {
+    @include custom-scrollbar;
     font-size: var(--font-size-default);
 
     strong, b {

@@ -1,6 +1,6 @@
 @mixin table {
     width: 100%;
-    
+
     & th {
         padding: var(--space-sm);
         position: sticky;
@@ -52,6 +52,13 @@
         padding: var(--space-sm);
     }
 }
+
+.table-flame {
+    border-radius: var(--radius-md);
+    background-color: var(--color-wrapper);
+}
+
+.table-container {}
 
 .table__one-column {
     @include table;
