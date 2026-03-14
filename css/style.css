@@ -1250,6 +1250,9 @@ textarea,
   padding: 0.5em 1rem;
   margin: 0.5rem auto;
 }
+.container__popover li, .container__popover li * {
+  cursor: pointer;
+}
 .container__popover li:has(input[type=checkbox]:checked) {
   font-weight: bold;
 }
