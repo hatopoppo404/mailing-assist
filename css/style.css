@@ -1001,6 +1001,11 @@ textarea,
   background-color: var(--color-wrapper);
 }
 
+.table-container {
+  border-radius: var(--radius-md);
+  background-color: var(--color-wrapper);
+}
+
 .table__one-column {
   width: 100%;
 }
@@ -1175,13 +1180,10 @@ textarea,
 .container__card--mail-template .preview-body {
   grid-area: preview;
   display: -webkit-box;
-  /* 必須：特殊なボックスモデルを使う */
   -webkit-box-orient: vertical;
-  /* 必須：垂直方向に並べる */
+  line-clamp: 2;
   -webkit-line-clamp: 2;
-  /* 表示したい行数を指定（ここでは2行） */
   overflow: hidden;
-  /* はみ出た分を隠す */
   padding: 0 var(--space-sm);
 }
 
