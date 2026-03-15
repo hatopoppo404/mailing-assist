@@ -17,3 +17,27 @@ h2 {
 h3 {
     font-size: var(--font-size-md);
 }
+
+.wrapper-icon {
+
+    & i {
+        display: block;
+        flex-shrink: 0;
+        color: currentColor;
+        width: var(--icon-width);
+    }
+
+    & svg {
+        display: block;
+        width: 100%;
+        height: auto;
+
+        & * {
+            stroke: currentColor;
+            stroke-width: var(--icon-stroke-width);
+            fill: var(--icon-fill-default);
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    }
+}

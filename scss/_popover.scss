@@ -18,15 +18,21 @@
     display: flex;
     flex-direction: column;
 
+    & li {
+        @include btn;
+        height: fit-content;
+        margin: 0.5rem auto;
+    }
+
     & ul, & ol, & li {
         list-style: none;
         padding: 0;
-        margin: 0;
+        margin: 0.5em;
         line-height: 1em;
 
         & label, & span {
             margin: 0;
-            padding: 0;
+            padding: 0.5em 1em;
         }
 
         & input[type="checkbox"] {
@@ -38,12 +44,6 @@
             margin: 0;
             padding: 0;
         }
-    }
-
-    & li {
-        @include btn;
-        padding: 0.5em 1rem;
-        margin: 0.5rem auto;
     }
 
     & li,
