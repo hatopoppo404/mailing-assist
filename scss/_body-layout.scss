@@ -23,8 +23,6 @@ html, body {
 
     column-gap: var(--space-2xl);
     padding: 0 var(--space-2xl);
-
-    position: relative;
 }
 
 // =======================================
@@ -96,7 +94,7 @@ header {
 
     & .table-container {
         max-height: 200px;
-        border-radius: var(--radius-md);
+        background-color: var(--color-wrapper);
 
         & .remove-cell {
             width: 24px;
@@ -122,7 +120,6 @@ header {
             display: block;
             width: 100%;
             height: 100%;
-            // background-color: aqua;
         }
     }
 }
@@ -282,12 +279,91 @@ footer {
 //               editor
 // =======================================
 dialog:has(.modal-editor-wrapper) {
+    &[open] {
+        all: unset;
+        inset: 0;
 
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+    }
+
+    &:not([open]) {
+        display: none;
+    }
 }
 
 .modal-editor-wrapper {
-    width: 100%;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     border-bottom: none;
+
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    height: 80%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xl);
+    padding: var(--space-3xl);
+    color: var(--color-text__light);
+
+    & .table-container {
+        max-height: 50vh;
+
+    }
+
+    & thead,
+    & th {
+        color: var(--color-text__dark);
+        padding-bottom: 0;
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+    }
+
+    & th > div {
+        width: fit-content;
+        height: fit-content;
+        margin: 0 auto 0.5em;
+        padding: 0.5em 1em;
+        border-radius: var(--radius-full);
+        background-color: var(--color-wrapper);
+        box-shadow: var(--shadow-glass);
+    }
+
+    & input,
+    & input:focus {
+        font-size: var(--font-size-default);
+        border: none;
+        outline: none;
+        border-left: var(--border-default);
+        border-width: 3px;
+        width: 100%;
+    }
+
+    & .wrapper-icon {
+        padding: 1em;
+    }
+
+    & button:has(i) {
+        aspect-ratio: 1 / 1;
+        padding: 0;
+        background-color: none !important;
+    }
+
+    & i {
+        transform: scale(1);
+    }
+
+}
+
+.modal-editor__actions {
+    display: flex;
+    gap: var(--space-3xl);
 }

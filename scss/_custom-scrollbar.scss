@@ -16,13 +16,13 @@
         background: rgba(174, 174, 174, 0.1);
         backdrop-filter: var(--blur-default);
         border-radius: var(--radius-full);
+        cursor: grab;
     }
 
-    // ホバー
-    &::-webkit-scrollbar-thumb:hover {
+    &::-webkit-scrollbar-thumb:hover,
+    &::-webkit-scrollbar-thumb:active {
         background: rgba(0, 0, 0, 0.2);
     }
-
 }
 
 .custom-scrollbar__y {

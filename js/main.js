@@ -36,3 +36,7 @@ pop.addEventListener("toggle", (e) => {
     // e.newState: "open" or "closed"
     if (e.newState === "closed") selectAddressSets(addressOptions)
 });
+
+const testmodal = document.getElementById('modal-editor');
+testmodal.close();
+// testmodal.showModal();

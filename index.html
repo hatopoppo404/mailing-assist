@@ -245,10 +245,54 @@
     </footer>
 
     <!-- db操作画面 -->
-    <dialog id="modal-editor" class="modal" open>
+    <dialog id="modal-editor" class="modal">
         <div id="modal-editor-wrapper" class="modal-editor-wrapper glass-effect">
-            <h2 class="edit-address-sets__title" id="edit-address-sets__title">タイトル</h2>
-            <div class="modal-editor__actions modal__actions">
+            <h2 class="edit-address-sets__title" id="edit-address-sets__title">宛先セット編集</h2>
+            <div class="table-container custom-scrollbar__y">
+                <table class="table__with-two-cards">
+                    <thead>
+                        <th class="is-start is-end">
+                            <div>宛先セット</div>
+                        </th>
+                        <th class="is-start">
+                            <div>宛名</div>
+                        </th>
+                        <th class="">
+                            <div>TO</div>
+                        </th>
+                        <th class="is-end">
+                            <div>CC</div>
+                        </th>
+                        <th class="is-end">
+                            <div>BCC</div>
+                        </th>
+                    </thead>
+                    <tbody id="address-sets-editor-table">
+                        <tr>
+                            <td class="is-start is-end"><input type="text" placeholder="(株)○○"></td>
+                            <td class="is-start"><input type="text" placeholder="敬称略：カンマ区切り"></td>
+                            <td class=""><input type="text" placeholder="「;」で複数指定"></td>
+                            <td class=""><input type="text" placeholder="「;」で複数指定"></td>
+                            <td class="is-end"><input type="text" placeholder="「;」で複数指定"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="container-btn">
+                <div class="wrapper-btn">
+                    <button class="btn">
+                        <div class="wrapper-icon">
+                            <i class="icon-plus" aria-hidden="true">
+                                <svg viewBox="0 0 31 31" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="16" y1="10" x2="16" y2="22" />
+                                    <line x1="10" y1="16" x2="22" y2="16" />
+                                </svg>
+                            </i>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-editor__actions">
                 <button id="modal-editor__ok" class="btn" type="button">OK</button>
                 <button id="modal-editor__cancel" class="btn" type="button">キャンセル</button>
             </div>

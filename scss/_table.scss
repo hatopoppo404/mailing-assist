@@ -60,7 +60,6 @@
 
 .table-container {
     border-radius: var(--radius-md);
-    background-color: var(--color-wrapper);
 }
 
 .table__one-column {
@@ -71,6 +70,14 @@
     table-layout: fixed;
     border-collapse: separate;
     border-spacing: var(--space-sm) 0;
+
+    & th {
+        padding: var(--space-sm);
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        max-height: 300px;
+    }
 
     // 行ごとの指定
     & tr {
