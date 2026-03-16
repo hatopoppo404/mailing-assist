@@ -1,7 +1,6 @@
 @use 'reset';
 @use 'base';
 @use 'variables';
-@use 'body-layout';
 @use 'custom-scrollbar';
 @use 'glass-effect';
 @use 'custom-message';
@@ -9,7 +8,9 @@
 @use 'focusable';
 @use 'quill';
 @use 'table';
-@use 'overlay-editer';
+@use 'overlay-editor';
 @use 'mail-template-component';
 @use 'popover';
+
+@use 'body-layout';
 @use 'icons';

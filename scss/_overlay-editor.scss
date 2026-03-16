@@ -1,6 +1,14 @@
 @use 'glass-effect' as *;
 
-.overlay-editer {
+// .modal-overlay {
+//     position: relative;
+//     width: 100%;
+//     height: 100%;
+//     border: none;
+
+// }
+
+.overlay-editor {
     @include glass-effect;
 
     transform: translateY(10px);
@@ -12,9 +20,9 @@
     color: var(--color-text__light);
     padding: var(--space-xl);
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-    width: calc(100% - 50px);
-    height: 75%;
-    border: var(--border-default);
+    width: 100%;
+    margin: 0 auto;
+    height: 90%;
     border-bottom: none;
 
     display: flex;
@@ -23,13 +31,13 @@
     gap: var(--space-xl);
 }
 
-.modal-overlay.is-open {
-    background-color: var(--color-overlay);
-    visibility: visible;
-    pointer-events: auto;
-}
+// .modal-overlay.is-open {
+//     background-color: var(--color-overlay);
+//     visibility: visible;
+//     pointer-events: auto;
+// }
 
-.modal-overlay.is-open .overlay-editer {
+.modal-overlay.is-open .overlay-editor {
     transform: translateY(0);
     opacity: 1;
 }

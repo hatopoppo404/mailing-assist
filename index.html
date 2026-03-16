@@ -22,7 +22,7 @@
         </div>
     </header>
     <aside class="left-side">
-        <div class="container-btn">
+        <div class="container-btn mail-downroad">
             <div class="wrapper-btn">
                 <button class="btn-cta">
                     <div class="wrapper-icon">
@@ -37,7 +37,7 @@
                 </button>
             </div>
         </div>
-        <div class="container__address-select-area">
+        <div class="container__address-select-area anchor-popover__variable-editor">
             <div class="wrapper__address-select-area">
                 <div class="container__selected-address-sets">
                     <h3>
@@ -49,22 +49,6 @@
                                 <tbody id="selected-address-sets">
                                     <tr>
                                         <td colspan="2">宛先を選択してください</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>${labelText}</td>
-                                        <td class="remove-cell">
-                                            <button class="remove-selected">
-                                                <i class="icon-remove" aria-hidden="true">
-                                                    <svg data-target="${checkboxId}" class="icon-backspace"
-                                                        viewBox="0 0 48 36">
-                                                        <path
-                                                            d="M36 12L24 24M24 12L36 24M42 2H16L2 18L16 34H42C43.0609 34 44.0783 33.5786 44.8284 32.8284C45.5786 32.0783 46 31.0609 46 30V6C46 4.93913 45.5786 3.92172 44.8284 3.17157C44.0783 2.42143 43.0609 2 42 2Z" />
-                                                    </svg>
-                                                </i>
-                                            </button>
-                                        </td>
-                                        
                                     </tr>
                                 </tbody>
                             </table>
@@ -84,27 +68,6 @@
                                 </i>
                             </div>
                             <span>宛先を追加する</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="container-btn">
-                    <div class="wrapper-btn">
-                        <button class="btn-icon-moving-left btn__variable-edit" id="btn__variable-edit"
-                            popovertarget="menu__variable-editer">
-                            <div class="wrapper-icon">
-                                <i class="icon-variable" aria-hidden="true">
-                                    <svg viewBox="0 0 26 18" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M3.92225 1C2.85963 1 1.99821 2.71923 1.99821 4.84V7.045L1.30143 7.91437C0.899522 8.41571 0.899522 9.58429 1.30143 10.0856L1.99821 10.9544V13.16C1.99821 15.2808 2.85963 17 3.92225 17" />
-                                        <path
-                                            d="M22.0778 1C23.1404 1 24.0018 2.71923 24.0018 4.84V7.045L24.6986 7.91437C25.1005 8.41571 25.1005 9.58429 24.6986 10.0856L24.0018 10.9544V13.16C24.0018 15.2808 23.1404 17 22.0778 17" />
-                                        <path d="M9.34558 3.37939H10.9345L15.0655 14.6204H16.6544" />
-                                        <path d="M16.3499 3.37939H14.8934L11.1066 14.6204H9.65013" />
-                                    </svg>
-                                </i>
-                            </div>
-                            <span>差込を編集する</span>
                         </button>
                     </div>
                 </div>
@@ -130,6 +93,58 @@
                             </label>
                         </li>
                     </ul>
+                </div>
+
+                <div class="container-btn">
+                    <div class="wrapper-btn">
+                        <button class="btn-icon-moving-left btn__variable-edit" id="btn__variable-edit"
+                            popovertarget="menu__variable-editor">
+                            <div class="wrapper-icon">
+                                <i class="icon-variable" aria-hidden="true">
+                                    <svg viewBox="0 0 26 18" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M3.92225 1C2.85963 1 1.99821 2.71923 1.99821 4.84V7.045L1.30143 7.91437C0.899522 8.41571 0.899522 9.58429 1.30143 10.0856L1.99821 10.9544V13.16C1.99821 15.2808 2.85963 17 3.92225 17" />
+                                        <path
+                                            d="M22.0778 1C23.1404 1 24.0018 2.71923 24.0018 4.84V7.045L24.6986 7.91437C25.1005 8.41571 25.1005 9.58429 24.6986 10.0856L24.0018 10.9544V13.16C24.0018 15.2808 23.1404 17 22.0778 17" />
+                                        <path d="M9.34558 3.37939H10.9345L15.0655 14.6204H16.6544" />
+                                        <path d="M16.3499 3.37939H14.8934L11.1066 14.6204H9.65013" />
+                                    </svg>
+                                </i>
+                            </div>
+                            <span>差込を編集する</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="menu__variable-editor" popover class="menu__variable-editor container__popover">
+                    <table id="variable-editor-table" class="table__with-two-cards">
+                        <thead>
+                            <th class="is-start is-end">宛先セット</th>
+                            <th class="is-start">{{宛名}}</th>
+                            <th class="">{{日付}}</th>
+                            <th class="is-end">{{品目}}</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="is-start is-end"><textarea name="" id=""></textarea></td>
+                                <td class="is-start"><textarea name="" id=""></textarea></td>
+                                <td class=""><textarea name="" id=""></textarea></td>
+                                <td class="is-end"><textarea name="" id=""></textarea></td>
+                            </tr>
+                            <tr>
+                                <td class="is-start is-end"><textarea name="" id=""></textarea></td>
+                                <td class="is-start"><textarea name="" id=""></textarea></td>
+                                <td class=""><textarea name="" id=""></textarea></td>
+                                <td class="is-end"><textarea name="" id=""></textarea></td>
+                            </tr>
+                            <tr>
+                                <td class="is-start is-end"><textarea name="" id=""></textarea></td>
+                                <td class="is-start"><textarea name="" id=""></textarea></td>
+                                <td class=""><textarea name="" id=""></textarea></td>
+                                <td class="is-end"><textarea name="" id=""></textarea></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -229,11 +244,19 @@
         <small>&copy; 2026 Shimamura Yusuke.</small>
     </footer>
 
-    <!-- モーダル表示用 -->
-    <dialog id="modal" class="modal">
-        <div id="edit-address-sets" class="edit-address-sets">
+    <!-- db操作画面 -->
+    <dialog id="modal-editor" class="modal" open>
+        <div id="modal-editor-wrapper" class="modal-editor-wrapper glass-effect">
             <h2 class="edit-address-sets__title" id="edit-address-sets__title">タイトル</h2>
+            <div class="modal-editor__actions modal__actions">
+                <button id="modal-editor__ok" class="btn" type="button">OK</button>
+                <button id="modal-editor__cancel" class="btn" type="button">キャンセル</button>
+            </div>
         </div>
+    </dialog>
+
+    <!-- カスタムメッセージ　モーダル表示用 -->
+    <dialog id="modal" class="modal">
         <div class="modal__panel" id="modal__panel">
             <h2 class="modal__title" id="modal__title">タイトル</h2>
             <p class="modal__text" id="modal__text">メッセージ内容が入ります</p>

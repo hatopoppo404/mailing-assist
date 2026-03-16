@@ -3,6 +3,7 @@
 // 関数インポート
 import { modalMessage } from './modal-alert.js';
 import { initEditor } from './quill.js';
+import { dbSetting } from './db.js';
 import { countSelectedAddressSets, selectAddressSets } from './address-list_select.js';
 
 // 変数宣言
@@ -20,12 +21,17 @@ const pop = document.getElementById("menu__address-sets");
 //     }
 // });
 
+// db設定
+dbSetting();
+
+
 // 宛先選択
 addressOptions.addEventListener('change', (e) => {
     if (!e.target.matches('input[type="checkbox"]')) return;
     countSelectedAddressSets(addressOptions);
 
 });
+
 pop.addEventListener("toggle", (e) => {
     // e.newState: "open" or "closed"
     if (e.newState === "closed") selectAddressSets(addressOptions)
