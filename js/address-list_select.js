@@ -22,12 +22,13 @@ export function selectAddressSets(addressOptions) {
         const checkboxId = cb.id;
 
         const row = document.createElement('tr');
+        row.dataset.id = checkboxId;
         row.innerHTML = `
             <td>${labelText}</td>
             <td class="remove-cell">
-                <button class="remove-selected">
+                <button class="remove-selected" data-id="${checkboxId}" >
                     <i class="icon-remove" aria-hidden="true">
-                        <svg data-target="${checkboxId}" class="icon-backspace" viewBox="0 0 48 36">
+                        <svg class="icon-backspace" viewBox="0 0 48 36">
                             <path d="M36 12L24 24M24 12L36 24M42 2H16L2 18L16 34H42C43.0609 34 44.0783 33.5786 44.8284 32.8284C45.5786 32.0783 46 31.0609 46 30V6C46 4.93913 45.5786 3.92172 44.8284 3.17157C44.0783 2.42143 43.0609 2 42 2Z" />
                         </svg>
                     </i>
@@ -65,6 +66,7 @@ export async function renderAddressOptions() {
                     <input type="checkbox" 
                            class="address-checkbox"
                            id="address-cb-${item.id}" 
+                           data-id="address-cb-${item.id}" 
                            value="${item.id}"
                            data-set-name="${item.setName || '名称未設定'}"
                            ${isChecked}>
@@ -78,4 +80,19 @@ export async function renderAddressOptions() {
 
     countSelectedAddressSets(document.getElementById('address-options'));
 
+};
+
+export const removeSelected = async (e) => {
+    const btn = e.target.closest('.remove-selected');
+    if (!btn) return;
+
+    const targetId = btn?.dataset.id;
+    if (!targetId) return;
+
+    const checkbox = Array.from(document.getElementById('address-options').querySelectorAll('input[type="checkbox"]'))
+        .find(item => item.dataset.id === targetId);
+    if (checkbox) checkbox.checked = false;
+
+    countSelectedAddressSets(addressOptions);
+    selectAddressSets(addressOptions);
 };

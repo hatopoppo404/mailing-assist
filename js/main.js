@@ -4,14 +4,18 @@
 import { modalMessage } from './modal-alert.js';
 import { initEditor } from './quill.js';
 import { db, dbSetting } from './db.js';
-import { countSelectedAddressSets, selectAddressSets, renderAddressOptions } from './address-list_select.js';
+import { countSelectedAddressSets, selectAddressSets, renderAddressOptions, removeSelected } from './address-list_select.js';
 import { addressSetsEdit } from './address-sets-editor.js'
+import { saveTemplate } from './mail-template-builder.js'
 
 // 変数宣言
 
 const myEditor = initEditor('#editor');
 const addressOptions = document.getElementById('address-options');
+const selectedAddressTableBody = document.getElementById('selected-address-sets');
 const addressPopover = document.getElementById("menu__address-sets");
+const btnOpenEditor = document.getElementById('btnOpenEditor');
+const btnSaveTemplate = document.getElementById('btn-save-template');
 
 // testbtn.addEventListener('click', async () => {
 
@@ -34,6 +38,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // 宛先選択
+selectedAddressTableBody.addEventListener('change', removeSelected);
+
 addressOptions.addEventListener('change', async (e) => {
     if (!e.target.matches('input[type="checkbox"]')) return;
 
@@ -61,15 +67,10 @@ addressPopover.addEventListener("toggle", async (e) => {
     }
 });
 
-
-const btnOpenEditor = document.getElementById('btnOpenEditor');
-
 btnOpenEditor.addEventListener('click', async (e) => {
-    const result = await addressSetsEdit()
-
-    if (result) {
-        await modalMessage('SUCCEEDED', 'データベースに保存しました', true);
-    }
-
+    await addressSetsEdit()
 });
 
+btnSaveTemplate.addEventListener('click', async (e) => {
+    await saveTemplate(myEditor)
+});

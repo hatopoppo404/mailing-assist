@@ -5,7 +5,7 @@ export async function modalMessage(title, message, okOnly) {
         const modal = document.getElementById('modal');
         const panel = document.getElementById('modal__panel');
         document.getElementById('modal__title').innerText = title;
-        document.getElementById('modal__text').innerText = message;
+        document.getElementById('modal__text').innerHTML = message;
         const okBtn = document.getElementById('modal__ok');
         const cancelBtn = document.getElementById('modal__cancel');
 
