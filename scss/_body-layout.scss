@@ -95,23 +95,6 @@ header {
     & .table-container {
         max-height: 200px;
         background-color: var(--color-wrapper);
-
-        & .remove-cell {
-            width: 24px;
-            padding-top: 0;
-            padding-bottom: 0;
-            text-align: center;
-            vertical-align: middle;
-            line-height: 0;
-
-            & button:hover path {
-                stroke: var(--color-danger);
-            }
-
-            & i {
-                transform: scale(0.8);
-            }
-        }
     }
 
     & li {
@@ -320,7 +303,9 @@ dialog:has(.modal-editor-wrapper) {
 
     & thead,
     & th {
-        color: var(--color-text__dark);
+        // color: var(--color-text__dark);
+        text-shadow: var(--shadow-glass);
+        border-radius: 0;
         padding-bottom: 0;
         position: sticky;
         top: 0;
@@ -330,11 +315,11 @@ dialog:has(.modal-editor-wrapper) {
     & th > div {
         width: fit-content;
         height: fit-content;
-        margin: 0 auto 0.5em;
+        margin: 0 auto 0.5em 4px;
         padding: 0.5em 1em;
-        border-radius: var(--radius-full);
-        background-color: var(--color-wrapper);
-        box-shadow: var(--shadow-glass);
+        box-shadow: none;
+        border: none;
+        background-color: var(--color-overlay);
     }
 
     & input,

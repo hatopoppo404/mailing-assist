@@ -150,7 +150,7 @@
         </div>
         <div class="container-btn">
             <div class="wrapper-btn">
-                <button class="btn-icon-moving-left">
+                <button class="btn-icon-moving-left" id="btnOpenEditor">
                     <div class="wrapper-icon">
                         <i class="icon-user" aria-hidden="true">
                             <svg viewBox="0 0 26 25" xmlns="http://www.w3.org/2000/svg">
@@ -252,35 +252,52 @@
                 <table class="table__with-two-cards">
                     <thead>
                         <th class="is-start is-end">
-                            <div>宛先セット</div>
+                            <div class="glass-effect">宛先セット</div>
                         </th>
                         <th class="is-start">
-                            <div>宛名</div>
+                            <div class="glass-effect">会社名</div>
                         </th>
                         <th class="">
-                            <div>TO</div>
+                            <div class="glass-effect">宛名</div>
+                        </th>
+                        <th class="">
+                            <div class="glass-effect">TO</div>
                         </th>
                         <th class="is-end">
-                            <div>CC</div>
+                            <div class="glass-effect">CC</div>
                         </th>
                         <th class="is-end">
-                            <div>BCC</div>
+                            <div class="glass-effect">BCC</div>
+                        </th>
+                        <th class="remove-btn">
+
                         </th>
                     </thead>
                     <tbody id="address-sets-editor-table">
                         <tr>
                             <td class="is-start is-end"><input type="text" placeholder="(株)○○"></td>
-                            <td class="is-start"><input type="text" placeholder="敬称略：カンマ区切り"></td>
+                            <td class="is-start"><input type="text" placeholder="株式会社○○　資材部"></td>
+                            <td class=""><input type="text" placeholder="敬称略：カンマ区切り"></td>
                             <td class=""><input type="text" placeholder="「;」で複数指定"></td>
                             <td class=""><input type="text" placeholder="「;」で複数指定"></td>
-                            <td class="is-end"><input type="text" placeholder="「;」で複数指定"></td>
+                            <td class=""><input type="text" placeholder="「;」で複数指定"></td>
+                            <td class="remove-cell is-end">
+                                <button class="remove-address-set">
+                                    <i class="icon-remove" aria-hidden="true">
+                                        <svg data-target="${checkboxId}" class="icon-backspace" viewBox="0 0 48 36">
+                                            <path
+                                                d="M36 12L24 24M24 12L36 24M42 2H16L2 18L16 34H42C43.0609 34 44.0783 33.5786 44.8284 32.8284C45.5786 32.0783 46 31.0609 46 30V6C46 4.93913 45.5786 3.92172 44.8284 3.17157C44.0783 2.42143 43.0609 2 42 2Z" />
+                                        </svg>
+                                    </i>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="container-btn">
                 <div class="wrapper-btn">
-                    <button class="btn">
+                    <button class="btn" id="modal-editor__add-row">
                         <div class="wrapper-icon">
                             <i class="icon-plus" aria-hidden="true">
                                 <svg viewBox="0 0 31 31" xmlns="http://www.w3.org/2000/svg">

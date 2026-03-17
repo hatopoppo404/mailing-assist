@@ -1,4 +1,6 @@
 
+import { db } from './db.js';
+
 export function countSelectedAddressSets(addressOptions) {
 
     const allCheckboxes = addressOptions.querySelectorAll('input[type="checkbox"]');
@@ -16,7 +18,7 @@ export function selectAddressSets(addressOptions) {
 
     tableBody.innerHTML = '';
     checkedItems.forEach(cb => {
-        const labelText = cb.closest('label').querySelector('span').textContent;
+        const labelText = cb.dataset.setName;
         const checkboxId = cb.id;
 
         const row = document.createElement('tr');
@@ -40,4 +42,40 @@ export function selectAddressSets(addressOptions) {
             <td colspan="2">宛先を選択してください</td>
         </tr>
     `;
+};
+
+export async function renderAddressOptions() {
+    const addressOptionsUl = document.getElementById('address-options');
+    if (!addressOptionsUl) return;
+
+    const [settings, allSets] = await Promise.all([
+        db.settings.get(1),
+        db.addressSets.toArray()
+    ]);
+
+    const selectedIds = settings?.lastSelectedAddressSetsIDs || [];
+
+    const htmlItems = allSets.map(item => {
+        // DBの配列にこのIDが含まれているか？（数値同士で比較）
+        const isChecked = selectedIds.includes(item.id) ? 'checked' : '';
+
+        return `
+            <li>
+                <label for="address-cb-${item.id}">
+                    <input type="checkbox" 
+                           class="address-checkbox"
+                           id="address-cb-${item.id}" 
+                           value="${item.id}"
+                           data-set-name="${item.setName || '名称未設定'}"
+                           ${isChecked}>
+                    <span>${item.setName || '名称未設定'}</span>
+                </label>
+            </li>
+        `;
+    }).join('');
+
+    addressOptionsUl.innerHTML = htmlItems || '<li>宛先データがありません</li>';
+
+    countSelectedAddressSets(document.getElementById('address-options'));
+
 };

@@ -511,6 +511,21 @@ button {
   transform: translateX(0);
 }
 
+.remove-cell {
+  width: 24px;
+  padding-top: 0;
+  padding-bottom: 0;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 0;
+}
+.remove-cell button:hover path {
+  stroke: var(--color-danger);
+}
+.remove-cell i {
+  transform: scale(0.8);
+}
+
 @keyframes shake {
   0% {
     transform: translateX(0);
@@ -1214,20 +1229,6 @@ header .logo img {
   max-height: 200px;
   background-color: var(--color-wrapper);
 }
-.container__address-select-area .table-container .remove-cell {
-  width: 24px;
-  padding-top: 0;
-  padding-bottom: 0;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 0;
-}
-.container__address-select-area .table-container .remove-cell button:hover path {
-  stroke: var(--color-danger);
-}
-.container__address-select-area .table-container .remove-cell i {
-  transform: scale(0.8);
-}
 .container__address-select-area li > label {
   display: block;
   width: 100%;
@@ -1383,7 +1384,8 @@ dialog:has(.modal-editor-wrapper):not([open]) {
   max-height: 50vh;
 }
 .modal-editor-wrapper thead, .modal-editor-wrapper th {
-  color: var(--color-text__dark);
+  text-shadow: var(--shadow-glass);
+  border-radius: 0;
   padding-bottom: 0;
   position: sticky;
   top: 0;
@@ -1394,11 +1396,11 @@ dialog:has(.modal-editor-wrapper):not([open]) {
   width: fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  margin: 0 auto 0.5em;
+  margin: 0 auto 0.5em 4px;
   padding: 0.5em 1em;
-  border-radius: var(--radius-full);
-  background-color: var(--color-wrapper);
-  box-shadow: var(--shadow-glass);
+  box-shadow: none;
+  border: none;
+  background-color: var(--color-overlay);
 }
 .modal-editor-wrapper input, .modal-editor-wrapper input:focus {
   font-size: var(--font-size-default);
