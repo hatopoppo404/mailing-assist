@@ -6,7 +6,12 @@ export const setVariableEditor = async () => {
 
     // dbから宛先セット情報取得
     const master = await db.addressSets.toArray();
+
+    // 
+    // こいつ↓を拡張する予定。そのあとにアップデートの関数を作成して拡張
+    // 
     const varValMaster = await db.variableValues.toArray();
+
 
     // セットされている宛先セットのidを取得
     const selectedIds = Array.from(document.querySelectorAll('.address-checkbox:checked'))
