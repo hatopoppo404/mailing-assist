@@ -13,9 +13,9 @@ export async function addressSetsEdit() {
             e.stopPropagation();
 
             const lastItem = await db.addressSets.orderBy('id').last();
-            const newId = lastItem ? lastItem.id + 1 : 1;
+            // const newId = lastItem ? lastItem.id + 1 : 1;
             tbody.insertAdjacentHTML('beforeend', `
-                <tr data-id="${newId}">
+                <tr data-id="">
                     <td class="is-start is-end"><input type="text" value="" placeholder="(株)○○"></td>
                     <td class="is-start"><input type="text" value="" placeholder="株式会社○○　資材部"></td>
                     <td class=""><input type="text" value="" placeholder="敬称略：カンマ区切り"></td>
@@ -23,7 +23,7 @@ export async function addressSetsEdit() {
                     <td class=""><input type="text" value="" placeholder="「;」で複数指定"></td>
                     <td class="is-end"><input type="text" value="" placeholder="「;」で複数指定"></td>
                     <td class="remove-cell is-start is-end">
-                        <button class="remove-address-set" data-id="${newId}">
+                        <button class="remove-address-set" data-id="">
                             <i class="icon-remove" aria-hidden="true">
                                 <svg class="icon-backspace" viewBox="0 0 48 36">
                                     <path
@@ -63,7 +63,7 @@ export async function addressSetsEdit() {
                 const existingItem = dbMap.get(id);
 
                 return {
-                    id: Number(row.dataset.id), // IDを数値に変換
+                    ...(row.dataset.id && { id: Number(row.dataset.id) }), // IDを数値に変換
                     setName: inputs[0].value,
                     company: inputs[1].value,
                     addressee: inputs[2].value,
