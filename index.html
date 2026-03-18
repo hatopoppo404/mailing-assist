@@ -50,6 +50,19 @@
                                     <tr>
                                         <td colspan="2">宛先を選択してください</td>
                                     </tr>
+                                    <tr data-id="address-cb-XXX">
+                                        <td>${labelText}</td>
+                                        <td class="remove-cell">
+                                            <button class="remove-selected" data-id="${checkboxId}">
+                                                <i class="icon-remove" aria-hidden="true">
+                                                    <svg class="icon-backspace" viewBox="0 0 48 36">
+                                                        <path
+                                                            d="M36 12L24 24M24 12L36 24M42 2H16L2 18L16 34H42C43.0609 34 44.0783 33.5786 44.8284 32.8284C45.5786 32.0783 46 31.0609 46 30V6C46 4.93913 45.5786 3.92172 44.8284 3.17157C44.0783 2.42143 43.0609 2 42 2Z" />
+                                                    </svg>
+                                                </i>
+                                            </button>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -74,24 +87,14 @@
 
                 <div id="menu__address-sets" popover class="container__popover">
                     <ul id="address-options">
-                        <li>
-                            <label for="multiple-option1">
-                                <input type="checkbox" name="multiple-option1" id="multiple-option1">
-                                <span>選択肢1</span>
+                        <!-- <li>
+                            <label for="address-cb-${item.id}">
+                                <input type="checkbox" class="address-checkbox" id="address-cb-${item.id}"
+                                    data-id="address-cb-${item.id}" value="${item.id}"
+                                    data-set-name="${item.setName || '名称未設定'}" ${isChecked}>
+                                <span>${item.setName || '名称未設定'}</span>
                             </label>
-                        </li>
-                        <li>
-                            <label for="multiple-option2">
-                                <input type="checkbox" name="multiple-option2" id="multiple-option2">
-                                <span>選択肢2</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label for="multiple-option3">
-                                <input type="checkbox" name="multiple-option3" id="multiple-option3">
-                                <span>選択肢3</span>
-                            </label>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
 
@@ -186,9 +189,11 @@
                     </div>
                 </div>
 
-                <div class="wrapper-mail-templates custom-scrollbar__y">
-                    <div class="mail-template-list-container">
-                        <div class="container__card--mail-template selected">
+                <div id="container-mail-templates" class="wrapper-mail-templates custom-scrollbar__y">
+                    <label class="mail-template-list-container" for="template-XXX">
+                        <div class="container__card--mail-template">
+                            <input type="radio" name="template-group" data-id="" id="template-XXX"
+                                class="card--mail-template">
                             <div class="wrapper-icon">
                                 <i class="icon-" aria-hidden="true">
                                     <!-- アイコンを入れる -->
@@ -206,7 +211,29 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </label>
+                    <label class="mail-template-list-container" for="template-XXXX">
+                        <div class="container__card--mail-template">
+                            <input type="radio" name="template-group" data-id="" id="template-XXXX"
+                                class="card--mail-template">
+                            <div class="wrapper-icon">
+                                <i class="icon-" aria-hidden="true">
+                                    <!-- アイコンを入れる -->
+                                </i>
+                            </div>
+                            <div class="wrapper-text">
+                                <h3 class="text-subject">件名が入ります件名が入ります件名が入ります件名が入ります</h3>
+                                <p class="text-addressee">
+                                    <span>宛先セット1</span><span>宛先セット2</span><span>宛先セット3</span><span>宛先セット3</span><span>宛先セット3</span><span>宛先セット3</span><span>宛先セット3</span>
+                                </p>
+                            </div>
+                            <div class="preview-body">
+                                <p>
+                                    本文のプレビューが入ります。本文のプレビューが入ります。本文のプレビューが入ります。本文のプレビューが入ります
+                                </p>
+                            </div>
+                        </div>
+                    </label>
                 </div>
 
             </section>

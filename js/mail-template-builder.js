@@ -11,16 +11,12 @@ export async function saveTemplate(quill) {
     try {
         const subject = document.getElementById('subject-input').value.trim();
         const htmlBody = quill.getSemanticHTML();
-        if (!subject || !htmlBody) return await modalMessage('FAILED', 'データベースに保存できませんでした<br>件名と本文を記入してください', true);
+        if (!subject || !htmlBody) return await modalMessage('FAILED', '件名と本文を記入してください', true);
 
-        const tableBody = document.querySelector('#selected-address-sets');
-        const rows = Array.from(tableBody.querySelectorAll('tr'));
-        const addressSetIds = rows.map(tr => {
-            const firstTd = tr.querySelector('td:first-child');
-            if (!firstTd || !firstTd.dataset.id) return null;
-
-            return Number(firstTd.dataset.id.replace('address-cb-', ''));
-        }).filter(id => id !== null);
+        const ul = document.getElementById('address-options');
+        const checkBoxes = Array.from(ul.querySelectorAll('input[type="checkbox"]:checked'));
+        const addressSetIds = checkBoxes.map(cb => Number(cb.id.replace('address-cb-', '')))
+            .filter(id => id !== null);
         const now = new Date().toISOString();
 
         const currentDbData = await db.templates.toArray();
@@ -54,4 +50,53 @@ export async function saveTemplate(quill) {
         await modalMessage('FAILED', 'データベースに保存できませんでした', true);
     }
 
+};
+
+export const makeTemplateList = async () => {
+
+    const [templates, allSet] = await Promise.all([
+        db.templates.toArray(),
+        db.addressSets.toArray()
+    ]);
+
+    const allhtml = templates.map(item => {
+        const allSetsHtml = item.addressSetId.map(id => {
+            const set = allSet.find(s => s.id === id);
+            const setName = set ? set.setName : '名称未設定';
+            return `<span>${setName}</span>`;
+        }).join('');
+        const plainText = item.body.replace(/<[^>]*>/g, '');
+        const templateCard = `
+            <label class="mail-template-list-container" for="template-${item.id}">
+                <div class="container__card--mail-template">
+                    <input type="radio" name="template-group" 
+                        value="${item.id}" 
+                        data-id="" 
+                        id="template-${item.id}"
+                        class="card--mail-template">
+                    <div class="wrapper-icon">
+                        <i class="icon-" aria-hidden="true">
+                        </i>
+                    </div>
+                    <div class="wrapper-text">
+                        <h3 class="text-subject">${item.subject}</h3>
+                        <p class="text-addressee">
+                            ${allSetsHtml}
+                        </p>
+                    </div>
+                    <div class="preview-body">
+                        <p>
+                            ${plainText}
+                        </p>
+                    </div>
+                </div>
+            </label>
+        `;
+        return templateCard;
+    }).join('');
+
+    const container = document.getElementById('container-mail-templates');
+    if (container) {
+        container.innerHTML = allhtml || '<p>テンプレートがありません</p>';
+    }
 };

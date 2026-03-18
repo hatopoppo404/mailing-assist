@@ -6,7 +6,7 @@ import { initEditor } from './quill.js';
 import { db, dbSetting } from './db.js';
 import { countSelectedAddressSets, selectAddressSets, renderAddressOptions, removeSelected } from './address-list_select.js';
 import { addressSetsEdit } from './address-sets-editor.js'
-import { saveTemplate } from './mail-template-builder.js'
+import { saveTemplate, makeTemplateList } from './mail-template-builder.js'
 
 // 変数宣言
 
@@ -72,5 +72,7 @@ btnOpenEditor.addEventListener('click', async (e) => {
 });
 
 btnSaveTemplate.addEventListener('click', async (e) => {
-    await saveTemplate(myEditor)
+    await saveTemplate(myEditor);
+    await makeTemplateList();
 });
+makeTemplateList();

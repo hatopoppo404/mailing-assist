@@ -1015,8 +1015,9 @@ textarea,
   opacity: 1;
 }
 
-.container__card--mail-template.selected {
+.container__card--mail-template:has(input[type=radio]:checked) {
   border: var(--border-default);
+  box-sizing: border-box;
 }
 
 .container__card--mail-template {
@@ -1028,6 +1029,19 @@ textarea,
   grid-template-columns: 48px 1fr;
   grid-template-areas: "icon main-text" "preview preview";
   gap: var(--space-md);
+  position: relative;
+}
+.container__card--mail-template input {
+  opacity: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
 }
 .container__card--mail-template .wrapper-icon {
   width: 100%;
