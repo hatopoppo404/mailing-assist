@@ -76,7 +76,7 @@ export async function renderAddressOptions() {
         `;
     }).join('');
 
-    addressOptionsUl.innerHTML = htmlItems || '<li>宛先データがありません</li>';
+    addressOptionsUl.innerHTML = htmlItems || '<p>宛先データがありません</p>';
 
     countSelectedAddressSets(document.getElementById('address-options'));
 

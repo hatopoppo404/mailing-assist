@@ -31,6 +31,7 @@
     border-radius: var(--radius-sm);
 
     overflow: hidden;
+    flex-shrink: 0;
 
     & .subject-input {
         border: none;
@@ -50,6 +51,9 @@
 }
 
 .editor-wrapper {
+    flex: 1;
+    min-height: 0;
+
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -69,7 +73,7 @@
     border-radius: 0 0 var(--radius-md) var(--radius-md);
     color: var(--color-text__dark);
     flex-grow: 1;
-    height: 100%;
+    flex: 1;
     overflow: hidden;
 }
 

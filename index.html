@@ -121,13 +121,13 @@
 
                 <div id="menu__variable-editor" popover class="menu__variable-editor container__popover">
                     <table id="variable-editor-table" class="table__with-two-cards">
-                        <thead>
+                        <thead id="variable-editor-header">
                             <th class="is-start is-end">宛先セット</th>
                             <th class="is-start">{{宛名}}</th>
                             <th class="">{{日付}}</th>
                             <th class="is-end">{{品目}}</th>
                         </thead>
-                        <tbody>
+                        <tbody id="variable-editor-tablebody">
                             <tr>
                                 <td class="is-start is-end"><textarea name="" id=""></textarea></td>
                                 <td class="is-start"><textarea name="" id=""></textarea></td>
@@ -268,6 +268,7 @@
         </div>
     </main>
     <footer>
+        <p>自動差し替え変数：{{TODAY}} {{TODAY+n}}</p>
         <small>&copy; 2026 Shimamura Yusuke.</small>
     </footer>
 

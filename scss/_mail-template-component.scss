@@ -17,7 +17,7 @@
      grid-template-areas:
          "icon main-text"
          "preview preview";
-     gap: var(--space-md);
+     gap: var(--space-sm);
 
      position: relative;
 
@@ -37,7 +37,8 @@
      & .wrapper-icon {
          width: 100%;
          aspect-ratio: 1 / 1;
-         background-color: var(--color-container);
+         //  background-color: var(--color-container);
+         background-image: linear-gradient(45deg, var(--color-primary-1), var(--color-primary-2));
          border-radius: var(--radius-full);
 
          grid-area: icon;
@@ -78,5 +79,6 @@
          overflow: hidden;
 
          padding: 0 var(--space-sm);
+         font-size: var(--font-size-sm);
      }
  }
