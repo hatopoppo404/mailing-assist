@@ -86,13 +86,13 @@ export const removeSelected = async (e) => {
     const btn = e.target.closest('.remove-selected');
     if (!btn) return;
 
-    const targetId = btn?.dataset.id;
+    const targetId = btn.dataset.id;
     if (!targetId) return;
 
-    const checkbox = Array.from(document.getElementById('address-options').querySelectorAll('input[type="checkbox"]'))
-        .find(item => item.dataset.id === targetId);
-    if (checkbox) checkbox.checked = false;
-
-    countSelectedAddressSets(addressOptions);
-    selectAddressSets(addressOptions);
+    // 1. チェックボックスを直接IDで取得（dataset.id ではなく id 属性で指定しているため）
+    const checkbox = document.getElementById(targetId);
+    if (checkbox) {
+        checkbox.checked = false;
+        checkbox.dispatchEvent(new Event('change', { bubbles: true }))
+    }
 };

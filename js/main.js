@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // 宛先選択
-selectedAddressTableBody.addEventListener('change', removeSelected);
+selectedAddressTableBody.addEventListener('click', removeSelected);
 
 addressOptions.addEventListener('change', async (e) => {
     if (!e.target.matches('input[type="checkbox"]')) return;
