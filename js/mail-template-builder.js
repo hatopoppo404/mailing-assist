@@ -1,7 +1,9 @@
 import { modalMessage } from './modal-alert.js';
 import { db, dbSetting } from './db.js';
+import { quill, initEditor } from './quill.js';
 
-export async function saveTemplate(quill) {
+
+export async function saveTemplate() {
     const isOk = await modalMessage('COMFIRM', '現状をテンプレート保存します', false);
     if (!isOk) return await modalMessage('FAILED', '保存はキャンセルされました', true);
 
@@ -99,4 +101,27 @@ export const makeTemplateList = async () => {
     if (container) {
         container.innerHTML = allhtml || '<p>テンプレートがありません</p>';
     }
+};
+
+export const setTemplate = async () => {
+    const targetEl = document.querySelector('input[name="template-group"]:checked');
+    if (!targetEl) return;
+
+    const selectedId = Number(targetEl.value);
+    const selectedTemplate = await db.templates.get(selectedId);
+    if (!selectedTemplate) return;
+
+    await db.settings.put({ id: 1, lastUsedTemplateID: selectedId });
+    document.querySelectorAll('.address-checkbox').forEach(cb => cb.checked = false);
+
+    // 差し込み
+    document.getElementById('subject-input').value = selectedTemplate.subject;
+    quill.root.innerHTML = selectedTemplate.body;
+    const selectedAddressSetsId = selectedTemplate.addressSetId.map(id => {
+        const cb = document.querySelector(`.address-checkbox[value="${id}"]`);
+        if (cb) cb.checked = true;
+    });
+
+    document.getElementById('address-options').dispatchEvent(new Event('change', { bubbles: true }));
+
 };

@@ -2,29 +2,21 @@
 
 // 関数インポート
 import { modalMessage } from './modal-alert.js';
-import { initEditor } from './quill.js';
+import { quill, initEditor } from './quill.js';
 import { db, dbSetting } from './db.js';
 import { countSelectedAddressSets, selectAddressSets, renderAddressOptions, removeSelected } from './address-list_select.js';
 import { addressSetsEdit } from './address-sets-editor.js'
-import { saveTemplate, makeTemplateList } from './mail-template-builder.js'
+import { saveTemplate, makeTemplateList, setTemplate } from './mail-template-builder.js'
 
 // 変数宣言
 
-const myEditor = initEditor('#editor');
+// const myEditor = initEditor('#editor');
 const addressOptions = document.getElementById('address-options');
 const selectedAddressTableBody = document.getElementById('selected-address-sets');
 const addressPopover = document.getElementById("menu__address-sets");
 const btnOpenEditor = document.getElementById('btnOpenEditor');
 const btnSaveTemplate = document.getElementById('btn-save-template');
-
-// testbtn.addEventListener('click', async () => {
-
-//     const result = await modalMessage('title', 'message', false);
-
-//     if (result) {
-//         alert('done');
-//     }
-// });
+const areaSelectTemplate = document.getElementById('container-mail-templates');
 
 
 // 読み込み時実行
@@ -72,7 +64,9 @@ btnOpenEditor.addEventListener('click', async (e) => {
 });
 
 btnSaveTemplate.addEventListener('click', async (e) => {
-    await saveTemplate(myEditor);
+    await saveTemplate();
     await makeTemplateList();
 });
 makeTemplateList();
+
+areaSelectTemplate.addEventListener('change', setTemplate);
