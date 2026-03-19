@@ -4,12 +4,8 @@ import { db, dbSetting } from './db.js';
 
 export const setVariableEditor = async () => {
 
-    // dbから宛先セット情報取得
+    // dbから情報取得
     const master = await db.addressSets.toArray();
-
-    // 
-    // こいつ↓を拡張する予定。そのあとにアップデートの関数を作成して拡張
-    // 
     const varValMaster = await db.variableValues.toArray();
 
 
@@ -36,13 +32,16 @@ export const setVariableEditor = async () => {
     // 変数差し込み値を入力
     const rowsHtml = selectedIds.map((id) => {
         const targetData = master.find(s => s.id === id);
+        const savedData = varValMaster.find(s => s.id === id);
         if (!targetData) return "";
 
         const tds = columns.map((label, index) => {
             let valueName = "";
-            if (label === "宛先セット") valueName = master.targetData.setName;
-            else if (label === "{{会社名}}") valueName = master.targetData.company;
-            else if (label === "{{宛名}}") valueName = master.targetData.addressee.replace(/,/g, '様　');
+            if (label === "宛先セット") valueName = targetData.setName;
+            else if (label === "{{会社名}}") valueName = targetData.company;
+            else if (label === "{{宛名}}") valueName = (targetData.addressee || "").replace(/,/g, '様　');
+            else valueName = savedData[label] ?? "";
+
 
             let className = "";
             if (index === 0) className = "is-start is-end";
