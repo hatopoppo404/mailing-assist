@@ -116,6 +116,7 @@ export const buildMailDataForAddress = ({
     const baseDate = new Date();
     const resolvedSubject = replaceVariables(subject, variableMap, baseDate);
     const resolvedBodyHtml = replaceVariables(bodyHtml, variableMap, baseDate);
+    const resolvedBodyText = replaceVariables(quill.getText(), variableMap, baseDate);
     const wrappedBodyHtml = wrapMailHtml(resolvedBodyHtml, bodyStyle);
 
     return {
@@ -125,21 +126,22 @@ export const buildMailDataForAddress = ({
         bcc: addressData?.bcc ?? '',
         subject: resolvedSubject,
         bodyHtml: wrappedBodyHtml,
+        bodyText: resolvedBodyText,
         fileName: buildMailFileName(resolvedSubject, index),
         variableMap
     };
 };
 
-export const buildEmlContent = ({ toName = '', toEmail = '', cc = '', bcc = '', subject = '', bodyHtml = '' }) => {
+export const buildEmlContent = ({ toName = '', toEmail = '', cc = '', bcc = '', subject = '', bodyHtml = '', bodyText = '' }) => {
     const encodedToName = toName ? encodeMimeHeader(toName) : '';
     const encodedSubject = encodeMimeHeader(subject);
     const toHeader = encodedToName ? `${encodedToName} <${toEmail}>` : toEmail;
+    const boundary = `boundary_${Date.now()}_${Math.random().toString(16).slice(2)}`;
     const headers = [
         `To: ${toHeader}`,
         `Subject: ${encodedSubject}`,
         'MIME-Version: 1.0',
-        'Content-Type: text/html; charset=UTF-8',
-        'Content-Transfer-Encoding: 8bit'
+        `Content-Type: multipart/alternative; boundary="${boundary}"`
     ];
 
     if (cc) headers.splice(1, 0, `Cc: ${cc}`);
@@ -148,7 +150,19 @@ export const buildEmlContent = ({ toName = '', toEmail = '', cc = '', bcc = '', 
     return [
         ...headers,
         '',
-        bodyHtml
+        `--${boundary}`,
+        'Content-Type: text/plain; charset=UTF-8',
+        'Content-Transfer-Encoding: 8bit',
+        '',
+        bodyText,
+        '',
+        `--${boundary}`,
+        'Content-Type: text/html; charset=UTF-8',
+        'Content-Transfer-Encoding: 8bit',
+        '',
+        bodyHtml,
+        '',
+        `--${boundary}--`
     ].join('\r\n');
 };
 
