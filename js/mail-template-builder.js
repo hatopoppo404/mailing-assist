@@ -1,6 +1,7 @@
 import { modalMessage } from './modal-alert.js';
 import { db, dbSetting } from './db.js';
 import { quill, initEditor } from './quill.js';
+import { getSelectedAddressSetIds, applySelectedAddressState, renderAddressOptions } from './address-list_select.js';
 
 
 export async function saveTemplate() {
@@ -15,11 +16,8 @@ export async function saveTemplate() {
         const htmlBody = quill.getSemanticHTML();
         if (!subject || !htmlBody) return await modalMessage('FAILED', '件名と本文を記入してください', true);
 
-        const ul = document.getElementById('address-options');
-        const checkBoxes = Array.from(ul.querySelectorAll('input[type="checkbox"]:checked'));
-        const addressSetIds = checkBoxes.map(cb => Number(cb.id.replace('address-cb-', '')))
-            .filter(id => id !== null);
-        const now = new Date().toISOString();
+        const addressSetIds = getSelectedAddressSetIds();
+        const now = new Date().toLocaleString('ja-JP');
 
         const currentDbData = await db.templates.toArray();
         const dbMap = new Map(currentDbData.map(item => [item.id, item.subject]));
@@ -112,7 +110,7 @@ export const setTemplate = async () => {
     if (!selectedTemplate) return;
 
     await db.settings.put({ id: 1, lastUsedTemplateID: selectedId });
-    document.querySelectorAll('.address-checkbox').forEach(cb => cb.checked = false);
+    // document.querySelectorAll('.address-checkbox').forEach(cb => cb.checked = false);
 
     // 差し込み
     document.getElementById('subject-input').value = selectedTemplate.subject;
@@ -121,7 +119,6 @@ export const setTemplate = async () => {
         const cb = document.querySelector(`.address-checkbox[value="${id}"]`);
         if (cb) cb.checked = true;
     });
-
-    document.getElementById('address-options').dispatchEvent(new Event('change', { bubbles: true }));
-
+    await applySelectedAddressState();
+    await renderAddressOptions();
 };

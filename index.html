@@ -24,7 +24,7 @@
     <aside class="left-side">
         <div class="container-btn mail-downroad">
             <div class="wrapper-btn">
-                <button class="btn-cta">
+                <button class="btn-cta" id="save-mails">
                     <div class="wrapper-icon">
                         <i class="icon-download" aria-hidden="true">
                             <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
@@ -123,23 +123,10 @@
                     <table id="variable-editor-table" class="table__with-two-cards">
                         <thead id="variable-editor-header">
                             <th class="is-start is-end">宛先セット</th>
-                            <th class="is-start">{{宛名}}</th>
-                            <th class="">{{日付}}</th>
-                            <th class="is-end">{{品目}}</th>
+                            <th class="is-start">{{会社名}}</th>
+                            <th class="is-end">{{名前}}</th>
                         </thead>
                         <tbody id="variable-editor-tablebody">
-                            <tr>
-                                <td class="is-start is-end"><textarea name="" id=""></textarea></td>
-                                <td class="is-start"><textarea name="" id=""></textarea></td>
-                                <td class=""><textarea name="" id=""></textarea></td>
-                                <td class="is-end"><textarea name="" id=""></textarea></td>
-                            </tr>
-                            <tr>
-                                <td class="is-start is-end"><textarea name="" id=""></textarea></td>
-                                <td class="is-start"><textarea name="" id=""></textarea></td>
-                                <td class=""><textarea name="" id=""></textarea></td>
-                                <td class="is-end"><textarea name="" id=""></textarea></td>
-                            </tr>
                             <tr>
                                 <td class="is-start is-end"><textarea name="" id=""></textarea></td>
                                 <td class="is-start"><textarea name="" id=""></textarea></td>
@@ -286,7 +273,7 @@
                             <div class="glass-effect">会社名</div>
                         </th>
                         <th class="">
-                            <div class="glass-effect">宛名</div>
+                            <div class="glass-effect">名前</div>
                         </th>
                         <th class="">
                             <div class="glass-effect">TO</div>

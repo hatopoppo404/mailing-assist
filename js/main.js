@@ -2,22 +2,31 @@
 
 // 関数インポート
 import { modalMessage } from './modal-alert.js';
-import { quill, initEditor } from './quill.js';
-import { db, dbSetting } from './db.js';
-import { countSelectedAddressSets, selectAddressSets, renderAddressOptions, removeSelected } from './address-list_select.js';
+import { quill } from './quill.js';
+import { db } from './db.js';
+import {
+    countSelectedAddressSets,
+    selectAddressSets,
+    renderAddressOptions,
+    removeSelected,
+    getSelectedAddressSetIds,
+    applySelectedAddressState
+} from './address-list_select.js';
 import { addressSetsEdit } from './address-sets-editor.js'
 import { saveTemplate, makeTemplateList, setTemplate } from './mail-template-builder.js'
+import { setVariableEditor, saveAllVariables } from './variable-editor.js'
+import { collectCurrentMailData, buildMailFiles } from './save-mails.js'
 
 // 変数宣言
-
-// const myEditor = initEditor('#editor');
 const addressOptions = document.getElementById('address-options');
 const selectedAddressTableBody = document.getElementById('selected-address-sets');
 const addressPopover = document.getElementById("menu__address-sets");
 const btnOpenEditor = document.getElementById('btnOpenEditor');
 const btnSaveTemplate = document.getElementById('btn-save-template');
 const areaSelectTemplate = document.getElementById('container-mail-templates');
-
+const btnVariableEdit = document.getElementById('btn__variable-edit');
+const VariableEditor = document.getElementById('menu__variable-editor');
+const btnSaveMails = document.getElementById('save-mails');
 
 // 読み込み時実行
 document.addEventListener('DOMContentLoaded', async () => {
@@ -27,6 +36,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         selectAddressSets(addressOptions);
         countSelectedAddressSets(addressOptions);
     }
+    await makeTemplateList();
+    await setVariableEditor();
 });
 
 // 宛先選択
@@ -35,20 +46,9 @@ selectedAddressTableBody.addEventListener('click', removeSelected);
 addressOptions.addEventListener('change', async (e) => {
     if (!e.target.matches('input[type="checkbox"]')) return;
 
-    // 現在チェックされている全ボタンから数値のID配列を作る
-    const checkedCbs = addressOptions.querySelectorAll('input[type="checkbox"]:checked');
-    const selectedIds = Array.from(checkedCbs).map(cb => Number(cb.value));
-
-    // 既存の設定を一度取ってきて、ID配列だけ差し替えて保存（他の設定値を壊さないため）
-    const currentSettings = await db.settings.get(1) || { id: 1 };
-
-    await db.settings.put({
-        ...currentSettings,
-        lastSelectedAddressSetsIDs: selectedIds,
-        updatedAt: new Date().toISOString()
-    });
-    countSelectedAddressSets(addressOptions);
-    selectAddressSets(addressOptions);
+    await applySelectedAddressState(addressOptions);
+    await renderAddressOptions();
+    setVariableEditor();
 });
 
 addressPopover.addEventListener("toggle", async (e) => {
@@ -67,6 +67,44 @@ btnSaveTemplate.addEventListener('click', async (e) => {
     await saveTemplate();
     await makeTemplateList();
 });
-makeTemplateList();
 
-areaSelectTemplate.addEventListener('change', setTemplate);
+areaSelectTemplate.addEventListener('change', async (e) => {
+    await setTemplate();
+    await setVariableEditor();
+});
+
+btnVariableEdit.addEventListener('click', setVariableEditor);
+
+VariableEditor.addEventListener('toggle', (e) => {
+    if (e.newState === 'closed') saveAllVariables();
+});
+
+btnSaveMails.addEventListener('click', async () => {
+    await saveAllVariables();
+    const currentMailData = await collectCurrentMailData();
+
+    const selectedAddresses = await db.addressSets
+        .where('id')
+        .anyOf(currentMailData.selectedAddressSetIds)
+        .toArray();
+
+    const mailFiles = buildMailFiles({
+        subject: currentMailData.subject,
+        bodyHtml: currentMailData.bodyHtml,
+        variableValues: currentMailData.variableValues,
+        selectedAddresses
+    });
+
+    if (!mailFiles.length) return;
+
+    const firstMail = mailFiles[0];
+    const blob = new Blob([firstMail.emlContent], { type: 'message/rfc822;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = firstMail.fileName;
+    link.click();
+
+    URL.revokeObjectURL(url);
+});

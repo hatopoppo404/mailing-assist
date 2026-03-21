@@ -53,7 +53,7 @@ export async function addressSetsEdit() {
             // 保存する処理を行う
             const currentDbData = await db.addressSets.toArray();
             const dbMap = new Map(currentDbData.map(item => [item.id, item]));
-            const now = new Date().toISOString();
+            const now = new Date().toLocaleString('ja-JP');
             const rows = Array.from(tbody.querySelectorAll('tr'));
 
             const updatedData = rows.map(row => {

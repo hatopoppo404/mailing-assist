@@ -1,10 +1,31 @@
-
 import { db } from './db.js';
+
+export const getSelectedAddressCheckboxes = (root = document) => {
+    return Array.from(root.querySelectorAll('#address-options .address-checkbox:checked'));
+};
+
+export const getSelectedAddressSetIds = (root = document) => {
+    return getSelectedAddressCheckboxes(root)
+        .map(cb => Number(cb.value))
+        .filter(Number.isFinite);
+};
+
+export const applySelectedAddressState = async (root = document) => {
+    const selectedIds = getSelectedAddressSetIds(root);
+    const currentSettings = await db.settings.get(1) || { id: 1 };
+
+    await db.settings.put({
+        ...currentSettings,
+        lastSelectedAddressSetsIDs: selectedIds,
+        updatedAt: new Date().toISOString()
+    });
+
+    return selectedIds;
+};
 
 export function countSelectedAddressSets(addressOptions) {
 
-    const allCheckboxes = addressOptions.querySelectorAll('input[type="checkbox"]');
-    const checkedItems = Array.from(allCheckboxes).filter(cb => cb.checked);
+    const checkedItems = getSelectedAddressCheckboxes(addressOptions);
     const countDisplay = document.getElementById('selected-count');
 
     if (countDisplay) countDisplay.textContent = checkedItems.length;
@@ -12,8 +33,7 @@ export function countSelectedAddressSets(addressOptions) {
 
 export function selectAddressSets(addressOptions) {
 
-    const allCheckboxes = addressOptions.querySelectorAll('input[type="checkbox"]');
-    const checkedItems = Array.from(allCheckboxes).filter(cb => cb.checked);
+    const checkedItems = getSelectedAddressCheckboxes(addressOptions);
     const tableBody = document.getElementById('selected-address-sets');
 
     tableBody.innerHTML = '';
@@ -78,8 +98,9 @@ export async function renderAddressOptions() {
 
     addressOptionsUl.innerHTML = htmlItems || '<p>宛先データがありません</p>';
 
-    countSelectedAddressSets(document.getElementById('address-options'));
-
+    const root = document.getElementById('address-options');
+    countSelectedAddressSets(root);
+    selectAddressSets(root);
 };
 
 export const removeSelected = async (e) => {
