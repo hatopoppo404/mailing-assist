@@ -33,10 +33,38 @@ export const wrapMailHtml = (html, style = DEFAULT_MAIL_STYLE) => {
 </html>`;
 };
 
-export const replaceVariables = (text, variableMap) => {
+export const formatAddressee = (addressee = '') => {
+    const raw = String(addressee ?? '').trim();
+    if (!raw) return '';
+    return raw.replace(/,/g, '様　') + '様';
+};
+
+export const formatDateForMail = (date) => {
+    const targetDate = new Date(date);
+    const year = targetDate.getFullYear();
+    const month = String(targetDate.getMonth() + 1).padStart(2, '0');
+    const day = String(targetDate.getDate()).padStart(2, '0');
+    return `${year}/${month}/${day}`;
+};
+
+export const buildTodayVariableMap = (baseDate = new Date()) => {
+    return {
+        '{{TODAY}}': formatDateForMail(baseDate)
+    };
+};
+
+export const replaceVariables = (text, variableMap, baseDate = new Date()) => {
     if (!text) return '';
 
-    return text.replace(/{{[^}]+}}/g, (tag) => {
+    return text.replace(/{{TODAY(?:([+-])(\d+))?}}|{{[^}]+}}/g, (tag, operator, offsetDays) => {
+        if (tag.startsWith('{{TODAY')) {
+            const nextDate = new Date(baseDate);
+            const days = Number(offsetDays ?? 0);
+            const signedDays = operator === '-' ? -days : days;
+            nextDate.setDate(nextDate.getDate() + signedDays);
+            return formatDateForMail(nextDate);
+        }
+
         const value = variableMap[tag];
         return value == null ? '' : String(value);
     });
@@ -55,16 +83,11 @@ export const encodeMimeHeader = (text = '') => {
     return `=?UTF-8?B?${btoa(binary)}?=`;
 };
 
-export const formatAddressee = (addressee = '') => {
-    const raw = String(addressee ?? '').trim();
-    if (!raw) return '';
-    return raw.replace(/,/g, '様　') + '様';
-};
-
 export const buildVariableMap = (addressData = {}, variableValues = []) => {
     const variableMap = {
         '{{会社名}}': addressData.company ?? '',
-        '{{名前}}': formatAddressee(addressData.addressee)
+        '{{名前}}': formatAddressee(addressData.addressee),
+        ...buildTodayVariableMap()
     };
 
     variableValues.forEach((item) => {
@@ -76,10 +99,9 @@ export const buildVariableMap = (addressData = {}, variableValues = []) => {
     return variableMap;
 };
 
-export const buildMailFileName = (addressData = {}, index = 0) => {
-    const safeCompany = String(addressData.company ?? 'company').replace(/[\\/:*?"<>|]/g, '_');
-    const safeName = String(addressData.addressee ?? 'name').replace(/[\\/:*?"<>|]/g, '_');
-    return `${String(index + 1).padStart(3, '0')}_${safeCompany}_${safeName}.eml`;
+export const buildMailFileName = (subject = '', index = 0) => {
+    const safeSubject = String(subject ?? 'mail').replace(/[\\/:*?"<>|]/g, '_').trim() || 'mail';
+    return `${String(index + 1).padStart(3, '0')}_${safeSubject}.eml`;
 };
 
 export const buildMailDataForAddress = ({
@@ -91,8 +113,9 @@ export const buildMailDataForAddress = ({
     bodyStyle = DEFAULT_MAIL_STYLE
 }) => {
     const variableMap = buildVariableMap(addressData, variableValues);
-    const resolvedSubject = replaceVariables(subject, variableMap);
-    const resolvedBodyHtml = replaceVariables(bodyHtml, variableMap);
+    const baseDate = new Date();
+    const resolvedSubject = replaceVariables(subject, variableMap, baseDate);
+    const resolvedBodyHtml = replaceVariables(bodyHtml, variableMap, baseDate);
     const wrappedBodyHtml = wrapMailHtml(resolvedBodyHtml, bodyStyle);
 
     return {
@@ -102,7 +125,7 @@ export const buildMailDataForAddress = ({
         bcc: addressData?.bcc ?? '',
         subject: resolvedSubject,
         bodyHtml: wrappedBodyHtml,
-        fileName: buildMailFileName(addressData, index),
+        fileName: buildMailFileName(resolvedSubject, index),
         variableMap
     };
 };
@@ -127,7 +150,7 @@ export const buildEmlContent = ({ toName = '', toEmail = '', cc = '', bcc = '', 
         '',
         bodyHtml
     ].join('\r\n');
-};  
+};
 
 export const buildMailFiles = ({
     subject,
@@ -151,4 +174,28 @@ export const buildMailFiles = ({
             emlContent: buildEmlContent(mailData)
         };
     });
+};
+
+export const downloadMailFilesAsZip = async (mailFiles = [], zipName = 'mails.zip') => {
+    if (!mailFiles.length) return;
+
+    if (typeof JSZip === 'undefined') {
+        throw new Error('JSZip is not loaded');
+    }
+
+    const zip = new JSZip();
+
+    mailFiles.forEach((mailFile) => {
+        zip.file(mailFile.fileName, mailFile.emlContent);
+    });
+
+    const blob = await zip.generateAsync({ type: 'blob' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+
+    link.href = url;
+    link.download = zipName;
+    link.click();
+
+    URL.revokeObjectURL(url);
 };

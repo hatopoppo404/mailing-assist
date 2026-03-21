@@ -15,7 +15,7 @@ import {
 import { addressSetsEdit } from './address-sets-editor.js'
 import { saveTemplate, makeTemplateList, setTemplate } from './mail-template-builder.js'
 import { setVariableEditor, saveAllVariables } from './variable-editor.js'
-import { collectCurrentMailData, buildMailFiles } from './save-mails.js'
+import { collectCurrentMailData, buildMailFiles, downloadMailFilesAsZip } from './save-mails.js'
 
 // 変数宣言
 const addressOptions = document.getElementById('address-options');
@@ -97,14 +97,5 @@ btnSaveMails.addEventListener('click', async () => {
 
     if (!mailFiles.length) return;
 
-    const firstMail = mailFiles[0];
-    const blob = new Blob([firstMail.emlContent], { type: 'message/rfc822;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = firstMail.fileName;
-    link.click();
-
-    URL.revokeObjectURL(url);
+    await downloadMailFilesAsZip(mailFiles, 'mails.zip');
 });
