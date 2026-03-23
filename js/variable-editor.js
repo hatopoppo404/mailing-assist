@@ -21,8 +21,9 @@ export const setVariableEditor = async () => {
 
     // quill本文から変数を取得
     const requiredTags = ["{{会社名}}", "{{名前}}"]
-    const rawTextToMacthes = quill.getText().match(/{{([^}]+)}}/g) ?? [];
-    const uniqueTags = [...new Set([...requiredTags, ...rawTextToMacthes])];
+    const rawSubjectToMacthes = document.querySelector('#subject-input').value?.match(/{{([^}]+)}}/g) ?? [];
+    const rawBodyToMacthes = quill.getText().match(/{{([^}]+)}}/g) ?? [];
+    const uniqueTags = [...new Set([...requiredTags, ...rawSubjectToMacthes, ...rawBodyToMacthes])];
     const columns = ["宛先セット", ...uniqueTags];
 
     const headerHtml = columns.map((col, index) => {

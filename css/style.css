@@ -881,6 +881,18 @@ textarea,
   fill: var(--color-primary-1) !important;
 }
 
+.ql-size-small {
+  font-size: small;
+}
+
+.ql-size-large {
+  font-size: large;
+}
+
+.ql-size-huge {
+  font-size: x-large;
+}
+
 .table-flame {
   border-radius: var(--radius-md);
   background-color: var(--color-wrapper);

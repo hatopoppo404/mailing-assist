@@ -16,14 +16,30 @@ export const collectCurrentMailData = async () => {
     };
 };
 
-const DEFAULT_MAIL_STYLE = `font-family: 'Yu Gothic', 'Meiryo', sans-serif; font-size: 9px; line-height: 1.7; color: #222;`;
+const DEFAULT_MAIL_STYLE = `font-family: 'Yu Gothic', 'Meiryo', sans-serif; font-size: 12px; line-height: 1; color: #222; margin: 0;`;
 
 export const wrapMailHtml = (html, style = DEFAULT_MAIL_STYLE) => {
-    return `<!doctype html>
+    const processedHtml = `<!doctype html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title></title>
+  <style>
+    * {
+        mso-line-height-rule: exactly;
+    }
+    .ql-size-small{
+        font-size: small;
+    }
+
+    .ql-size-large {
+        font-size: large;
+    }
+
+    .ql-size-huge {
+        font-size: x-large;
+    }
+  </style>
 </head>
 <body>
   <div style="${style}">
@@ -31,6 +47,7 @@ export const wrapMailHtml = (html, style = DEFAULT_MAIL_STYLE) => {
   </div>
 </body>
 </html>`;
+    return processedHtml.replace(/<p>/g, '<p style="margin: 0; line-height: 1.2;">');
 };
 
 export const formatAddressee = (addressee = '') => {
@@ -90,11 +107,14 @@ export const buildVariableMap = (addressData = {}, variableValues = []) => {
         ...buildTodayVariableMap()
     };
 
-    variableValues.forEach((item) => {
-        if (!item?.variableName) return;
-        const tag = `{{${item.variableName}}}`;
-        variableMap[tag] = item.value ?? '';
-    });
+    const targetVariables = variableValues.find(set => set.addressSetId === addressData.id);
+    if (targetVariables && targetVariables.values) {
+        Object.entries(targetVariables.values).forEach(([key, value]) => {
+            if (key) {
+                variableMap[key] = value ?? '';
+            }
+        });
+    }
 
     return variableMap;
 };
@@ -120,7 +140,7 @@ export const buildMailDataForAddress = ({
     const wrappedBodyHtml = wrapMailHtml(resolvedBodyHtml, bodyStyle);
 
     return {
-        toName: formatAddressee(addressData?.addressee),
+        // toName: formatAddressee(addressData?.addressee),
         toEmail: addressData?.to ?? '',
         cc: addressData?.cc ?? '',
         bcc: addressData?.bcc ?? '',
