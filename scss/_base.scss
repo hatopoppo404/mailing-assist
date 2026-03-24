@@ -1,7 +1,6 @@
-body {
+html, body {
     font-family: '游ゴシック', sans-serif;
     font-size: var(--font-size-default);
-    font: 400;
     color: var(--color-text__dark);
     line-height: 1.5rem;
 }
@@ -17,7 +16,8 @@ h2 {
 h3 {
     font-size: var(--font-size-md);
 }
-small{
+
+small {
     font-size: var(--font-size-sm);
 }
 

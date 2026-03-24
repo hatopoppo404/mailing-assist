@@ -26,7 +26,7 @@
     height: 40px;
     margin: 0 0 var(--space-sm);
 
-    border: var(--border-default);
+    border: var(--border-thin);
     border-radius: var(--radius-sm);
 
     overflow: hidden;
@@ -64,6 +64,7 @@
     @include glass-effect;
 
     border-radius: var(--radius-sm);
+    border: var(--border-thin);
     z-index: 1;
 }
 
