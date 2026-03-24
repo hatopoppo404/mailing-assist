@@ -5,6 +5,7 @@ export function initEditor(containerId) {
         modules: {
             toolbar: [
                 ['bold', 'italic', 'underline'],
+                [{ 'color': [] }, { 'background': [] }],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 [{ 'size': ['small', false, 'large', 'huge'] }],
                 ['table'],

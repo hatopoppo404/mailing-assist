@@ -99,3 +99,25 @@ btnSaveMails.addEventListener('click', async () => {
 
     await downloadMailFilesAsZip(mailFiles, 'mails.zip');
 });
+
+// my-react-app/
+// ├── index.html       # 【これ！】全ての土台となるファイル
+// ├── package.json     # プロジェクトの設定書
+// ├── vite.config.js   # Viteの設定
+// ├── public/          # 公開用静的ファイル
+// └── src/
+
+
+// src /
+// ├── assets /          # 画像やアイコン
+// ├── components /      # 【重要】再利用する共通パーツ
+// │   ├── Button /
+// │   │   ├── Button.jsx        # 構造とロジック
+// │   │   └── Button.module.css # 見た目
+// │   └── UserCard /
+// │       ├── UserCard.jsx
+// │       └── UserCard.module.css
+// ├── features /        # 特定の機能（ログイン、商品一覧など）ごとの塊
+// ├── hooks /           # 共通のロジック（計算など）
+// ├── App.jsx          # 全体を組み立てるメイン画面
+// └── main.jsx         # Reactを起動する根っこのファイル
