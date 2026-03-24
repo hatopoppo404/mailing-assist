@@ -1,5 +1,5 @@
 import { db, dbSetting } from './db.js';
-import { quill, initEditor } from './quill.js';
+import { quill } from './quill.js';
 import { getSelectedAddressSetIds } from './address-list_select.js';
 
 /**

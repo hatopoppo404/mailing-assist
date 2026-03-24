@@ -1,6 +1,6 @@
 import { modalMessage } from './modal-alert.js';
 import { db, dbSetting } from './db.js';
-import { quill, initEditor } from './quill.js';
+import { quill } from './quill.js';
 import { getSelectedAddressSetIds, applySelectedAddressState, renderAddressOptions } from './address-list_select.js';
 
 
