@@ -111,12 +111,16 @@ export const buildVariableMap = (addressData = {}, variableValues = []) => {
     if (targetVariables && targetVariables.values) {
         Object.entries(targetVariables.values).forEach(([key, value]) => {
             if (key) {
-                variableMap[key] = value ?? '';
+                variableMap[key] = replaceLineBr(value) ?? '';
             }
         });
     }
 
     return variableMap;
+};
+
+export const replaceLineBr = (lines) => {
+    return lines.replace(/\n/g, '<br>');
 };
 
 export const buildMailFileName = (subject = '', index = 0) => {
