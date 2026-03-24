@@ -158,14 +158,15 @@ export const buildEmlContent = ({ toName = '', toEmail = '', cc = '', bcc = '', 
     const toHeader = encodedToName ? `${encodedToName} <${toEmail}>` : toEmail;
     const boundary = `boundary_${Date.now()}_${Math.random().toString(16).slice(2)}`;
     const headers = [
+        `X-Unsent: 1`,
         `To: ${toHeader}`,
         `Subject: ${encodedSubject}`,
         'MIME-Version: 1.0',
         `Content-Type: multipart/alternative; boundary="${boundary}"`
     ];
 
-    if (cc) headers.splice(1, 0, `Cc: ${cc}`);
-    if (bcc) headers.splice(2, 0, `Bcc: ${bcc}`);
+    if (cc) headers.splice(2, 0, `Cc: ${cc}`);
+    if (bcc) headers.splice(3, 0, `Bcc: ${bcc}`);
 
     return [
         ...headers,
