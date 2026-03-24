@@ -14,7 +14,6 @@
 @use 'custom-scrollbar' as *;
 
 .editor-container {
-    // margin: var(--space-md) var(--space-3xl);
     border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
     background-color: var(--color-wrapper);
     padding: var(--space-3xl);
@@ -125,7 +124,7 @@
     fill: var(--color-primary-1) !important;
 }
 
-.ql-size-small{
+.ql-size-small {
     font-size: small;
 }
 

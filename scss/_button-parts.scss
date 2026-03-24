@@ -17,6 +17,7 @@
     padding: var(--padding-default);
     border: var(--boder-default);
     background-color: var(--color-container);
+    background-color: rgba(255, 255, 255, 0.6);
     font-size: var(--font-size-md);
     cursor: pointer;
 
@@ -102,11 +103,11 @@ button {
 
     background-color: var(--color-bg-dark);
     background-image:
-        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6)),
         linear-gradient(45deg, var(--color-primary-1), var(--color-primary-2));
     background-origin: border-box;
     background-clip: padding-box, border-box;
-    border: 2px solid transparent;
+    border: 3px solid transparent;
 
     transition: var(--transition-default);
 
@@ -118,6 +119,7 @@ button {
     & span, & p {
         color: var(--color-text__light);
         font-size: var(--font-size-md);
+        text-shadow: var(--shadow-glass);
     }
 }
 
