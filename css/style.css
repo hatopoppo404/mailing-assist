@@ -219,7 +219,7 @@ small {
   --color-primary-1: #4285f4;
   --color-primary-2: #9b72cb;
   --font-size-sm: calc(var(--font-size-default) * 0.8);
-  --font-size-default: 14px;
+  --font-size-default: 10px;
   --font-size-md: calc(var(--font-size-default) * 1.2);
   --font-size-lg: calc(var(--font-size-default) * 1.6);
   --font-size-xl: calc(var(--font-size-default) * 2);
@@ -1121,8 +1121,12 @@ textarea,
   background-color: var(--color-glass-bg);
   padding: var(--padding-default);
   border-radius: var(--radius-md);
+  max-width: 200px;
+}
+.container__popover ul {
   display: flex;
   flex-direction: column;
+  gap: var(--space-sm);
 }
 .container__popover li {
   border-radius: var(--radius-full);
@@ -1146,19 +1150,16 @@ textarea,
 .container__popover li {
   height: -moz-fit-content;
   height: fit-content;
-  margin: 0.5rem auto;
-}
-.container__popover ul, .container__popover ol, .container__popover li {
   list-style: none;
   padding: 0;
-  margin: 0.5em;
-  line-height: 1em;
+  line-height: 1.3em;
+  text-align: center;
 }
-.container__popover ul label, .container__popover ul span, .container__popover ol label, .container__popover ol span, .container__popover li label, .container__popover li span {
+.container__popover li label {
   margin: 0;
-  padding: 0.5em 1em;
+  padding: 0.5em 0;
 }
-.container__popover ul input[type=checkbox], .container__popover ol input[type=checkbox], .container__popover li input[type=checkbox] {
+.container__popover li input[type=checkbox] {
   -moz-appearance: none;
        appearance: none;
   -webkit-appearance: none;
