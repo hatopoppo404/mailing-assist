@@ -8,6 +8,9 @@
 .anchor-popover__variable-editor {
     anchor-name: --variable-editor;
 }
+.anchor-popover__template-sort {
+    anchor-name: --template-sort;
+}
 
 .container__popover {
     margin: unset;
@@ -72,4 +75,9 @@
 .container__popover:popover-open {
     opacity: 1;
     transform: translateY(0);
+}
+
+.sort-by{
+    display: flex;
+    flex-direction: row;
 }

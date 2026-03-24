@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>mailing-assist</title>
+    <link rel="icon" href="/img/favicon.svg" type="image/x-icon">
+
     <script src="https://unpkg.com/dexie/dist/dexie.js" defer></script>
 
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
@@ -164,7 +166,7 @@
                 </div>
                 <div class="container-btn">
                     <div class="wrapper-btn">
-                        <button>
+                        <button id="btn-sort" popovertarget="sort-popover">
                             <i class="icon-slicer" aria-hidden="true">
                                 <svg viewBox="0 0 18 10" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1 1H17" />
@@ -173,6 +175,64 @@
                                 </svg>
                             </i>
                         </button>
+                        <div id="sort-popover" class="glass-effect container__popover" popover>
+                            <div class="sort-by">
+                                <h3>件名で並べ替える</h3>
+                                <button id="sort-subject-az" class="btn"><svg width="27" height="41" viewBox="0 0 27 41"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M21 37L26.7735 27L15.2265 27L21 37ZM21 13L20 13L20 28L21 28L22 28L22 13L21 13Z"
+                                            fill="black" fill-opacity="0.5" />
+                                        <path
+                                            d="M9.18945 9.16016L10.6543 7.37305H1.48438V4.73633H16.416L7.87109 15.4688L6.34766 17.3633H15.9375V20H0.732422L9.18945 9.16016Z"
+                                            fill="black" />
+                                        <path
+                                            d="M5.89844 24.7891H8.52344L14.4297 37H11.8281L10.8516 34.9453H3.71875L2.77344 37H0.164062L5.89844 24.7891ZM9.875 32.9062L7.23438 27.3594L4.66406 32.9062H9.875Z"
+                                            fill="black" fill-opacity="0.5" />
+                                    </svg></button>
+                                <button id="sort-subject-za" class="btn"><svg width="27" height="41" viewBox="0 0 27 41"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M21 37L26.7735 27L15.2265 27L21 37ZM21 13L20 13L20 28L21 28L22 28L22 13L21 13Z"
+                                            fill="black" fill-opacity="0.5" />
+                                        <path
+                                            d="M7.37305 4.73633H10.6543L18.0371 20H14.7852L13.5645 17.4316H4.64844L3.4668 20H0.205078L7.37305 4.73633ZM12.3438 14.8828L9.04297 7.94922L5.83008 14.8828H12.3438Z"
+                                            fill="black" />
+                                        <path
+                                            d="M7.35156 28.3281L8.52344 26.8984H1.1875V24.7891H13.1328L6.29688 33.375L5.07812 34.8906H12.75V37H0.585938L7.35156 28.3281Z"
+                                            fill="black" fill-opacity="0.5" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="sort-by">
+                                <h3>作成順で並べ替える</h3>
+                                <button id="sort-createdat-az" class="btn"><svg width="27" height="41"
+                                        viewBox="0 0 27 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M21 37L26.7735 27L15.2265 27L21 37ZM21 13L20 13L20 28L21 28L22 28L22 13L21 13Z"
+                                            fill="black" fill-opacity="0.5" />
+                                        <path
+                                            d="M9.18945 9.16016L10.6543 7.37305H1.48438V4.73633H16.416L7.87109 15.4688L6.34766 17.3633H15.9375V20H0.732422L9.18945 9.16016Z"
+                                            fill="black" />
+                                        <path
+                                            d="M5.89844 24.7891H8.52344L14.4297 37H11.8281L10.8516 34.9453H3.71875L2.77344 37H0.164062L5.89844 24.7891ZM9.875 32.9062L7.23438 27.3594L4.66406 32.9062H9.875Z"
+                                            fill="black" fill-opacity="0.5" />
+                                    </svg></button>
+                                <button id="sort-createdat-za" class="btn"><svg width="27" height="41"
+                                        viewBox="0 0 27 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M21 37L26.7735 27L15.2265 27L21 37ZM21 13L20 13L20 28L21 28L22 28L22 13L21 13Z"
+                                            fill="black" fill-opacity="0.5" />
+                                        <path
+                                            d="M7.37305 4.73633H10.6543L18.0371 20H14.7852L13.5645 17.4316H4.64844L3.4668 20H0.205078L7.37305 4.73633ZM12.3438 14.8828L9.04297 7.94922L5.83008 14.8828H12.3438Z"
+                                            fill="black" />
+                                        <path
+                                            d="M7.35156 28.3281L8.52344 26.8984H1.1875V24.7891H13.1328L6.29688 33.375L5.07812 34.8906H12.75V37H0.585938L7.35156 28.3281Z"
+                                            fill="black" fill-opacity="0.5" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

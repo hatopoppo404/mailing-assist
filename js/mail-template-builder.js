@@ -122,3 +122,4 @@ export const setTemplate = async () => {
     await applySelectedAddressState();
     await renderAddressOptions();
 };
+
