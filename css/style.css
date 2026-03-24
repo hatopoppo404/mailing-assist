@@ -216,8 +216,8 @@ small {
   --color-hover: rgba(255, 255, 255, 0.3);
   --color-btn-hover: rgb(223, 223, 223);
   --color-border: rgba(206, 206, 206, 1);
-  --color-primary-1: #aacbff;
-  --color-primary-2: #e7d1ff;
+  --color-primary-1: #f1f2f3;
+  --color-primary-2: #b8b8b8;
   --font-size-sm: calc(var(--font-size-default) * 0.8);
   --font-size-default: 10px;
   --font-size-md: calc(var(--font-size-default) * 1.2);
@@ -317,7 +317,6 @@ button {
   padding: var(--padding-default);
   border: var(--boder-default);
   background-color: var(--color-container);
-  background-color: rgba(255, 255, 255, 0.6);
   font-size: var(--font-size-md);
   cursor: pointer;
 }
@@ -338,7 +337,6 @@ button {
   padding: var(--padding-default);
   border: var(--boder-default);
   background-color: var(--color-container);
-  background-color: rgba(255, 255, 255, 0.6);
   font-size: var(--font-size-md);
   cursor: pointer;
 }
@@ -387,7 +385,6 @@ button {
   padding: var(--padding-default);
   border: var(--boder-default);
   background-color: var(--color-container);
-  background-color: rgba(255, 255, 255, 0.6);
   font-size: var(--font-size-md);
   cursor: pointer;
 }
@@ -465,7 +462,7 @@ button {
   border: var(--boder-default);
   border-radius: var(--radius-full);
   outline: none;
-  font-size: var(--font-size-default);
+  font-size: var(--font-size-md);
 }
 .btn-icon-moving-left .wrapper-icon {
   display: flex;
@@ -606,7 +603,6 @@ button {
   padding: var(--padding-default);
   border: var(--boder-default);
   background-color: var(--color-container);
-  background-color: rgba(255, 255, 255, 0.6);
   font-size: var(--font-size-md);
   cursor: pointer;
 }
@@ -1138,7 +1134,6 @@ textarea,
   padding: var(--padding-default);
   border: var(--boder-default);
   background-color: var(--color-container);
-  background-color: rgba(255, 255, 255, 0.6);
   font-size: var(--font-size-md);
   cursor: pointer;
 }
