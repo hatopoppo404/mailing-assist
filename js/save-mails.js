@@ -245,8 +245,8 @@ export const downloadMailFiles = async (mailFiles = []) => {
     for (const mailFile of mailFiles) {
         const content = mailFile.emlContent;
 
-        const blob = new Blob(['\ufeff', content], { type: 'message/rfc822' });
-
+        // const blob = new Blob(['\ufeff', content], { type: 'message/rfc822' });
+        const blob = new Blob([content], { type: 'message/rfc822' });
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
