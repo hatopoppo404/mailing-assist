@@ -238,3 +238,28 @@ export const downloadMailFilesAsZip = async (mailFiles = [], zipName = 'mails.zi
 
     URL.revokeObjectURL(url);
 };
+
+export const downloadMailFiles = async (mailFiles = []) => {
+    if (!mailFiles.length) return;
+
+    for (const mailFile of mailFiles) {
+        const content = mailFile.emlContent;
+
+        const blob = new Blob(['\ufeff', content], { type: 'message/rfc822' });
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+
+        const rawName = mailFile.fileName || `mail_${Date.now()}.eml`;
+        link.download = rawName.endsWith('.eml') ? rawName : `${rawName}.eml`;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+        await new Promise(resolve => setTimeout(resolve, 200));
+    }
+};

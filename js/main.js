@@ -15,7 +15,12 @@ import {
 import { addressSetsEdit } from './address-sets-editor.js'
 import { saveTemplate, makeTemplateList, setTemplate } from './mail-template-builder.js'
 import { setVariableEditor, saveAllVariables } from './variable-editor.js'
-import { collectCurrentMailData, buildMailFiles, downloadMailFilesAsZip } from './save-mails.js'
+import {
+    collectCurrentMailData,
+    buildMailFiles,
+    downloadMailFilesAsZip,
+    downloadMailFiles
+} from './save-mails.js'
 
 // 変数宣言
 const addressOptions = document.getElementById('address-options');
@@ -97,7 +102,7 @@ btnSaveMails.addEventListener('click', async () => {
 
     if (!mailFiles.length) return;
 
-    await downloadMailFilesAsZip(mailFiles, 'mails.zip');
+    await downloadMailFiles(mailFiles);
 });
 
 // my-react-app/
