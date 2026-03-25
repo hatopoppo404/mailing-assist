@@ -7,7 +7,7 @@ export const collectCurrentMailData = async () => {
 
     return {
         subject: document.getElementById('subject-input')?.value.trim() ?? '',
-        bodyHtml: quill.root.innerHTML,
+        bodyHtml: quill.root.innerHTML.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;'),
         bodyText: quill.getText(),
         selectedAddressSetIds: settings?.lastSelectedAddressSetsIDs ?? [],
         lastUsedTemplateID: settings?.lastUsedTemplateID ?? null,
