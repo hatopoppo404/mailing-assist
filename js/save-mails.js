@@ -16,7 +16,7 @@ export const collectCurrentMailData = async () => {
     };
 };
 
-const DEFAULT_MAIL_STYLE = `font-family: 'Yu Gothic', 'Meiryo', sans-serif; font-size: 12px; line-height: 1; color: #222; margin: 0;`;
+const DEFAULT_MAIL_STYLE = `font-family: 'Yu Gothic', 'Meiryo', sans-serif; font-size: 10pt; line-height: 1; color: #222; margin: 0;`;
 
 export const wrapMailHtml = (html, style = DEFAULT_MAIL_STYLE) => {
     const processedHtml = `<!doctype html>
@@ -47,7 +47,7 @@ export const wrapMailHtml = (html, style = DEFAULT_MAIL_STYLE) => {
   </div>
 </body>
 </html>`;
-    return processedHtml.replace(/<p>/g, '<p style="margin: 0; line-height: 1.2;">');
+    return processedHtml.replace(/<p>/g, '<p style="margin: 0; line-height: 1;">');
 };
 
 export const formatAddressee = (addressee = '') => {
