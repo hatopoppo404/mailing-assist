@@ -1128,7 +1128,6 @@ textarea,
   background-color: var(--color-glass-bg);
   padding: var(--padding-default);
   border-radius: var(--radius-md);
-  max-width: 200px;
 }
 .container__popover ul {
   display: flex;
@@ -1192,6 +1191,8 @@ textarea,
 .container__popover:popover-open {
   opacity: 1;
   transform: translateY(0);
+  max-width: 200px;
+  max-height: 200px;
 }
 
 .sort-by {

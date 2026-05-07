@@ -8,6 +8,7 @@
 .anchor-popover__variable-editor {
     anchor-name: --variable-editor;
 }
+
 .anchor-popover__template-sort {
     anchor-name: --template-sort;
 }
@@ -21,9 +22,6 @@
     background-color: var(--color-glass-bg);
     padding: var(--padding-default);
     border-radius: var(--radius-md);
-
-    max-width: 200px;
-    max-height: 400px;
 
     & ul {
         display: flex;
@@ -76,9 +74,12 @@
 .container__popover:popover-open {
     opacity: 1;
     transform: translateY(0);
+
+    max-width: 200px;
+    max-height: 200px;
 }
 
-.sort-by{
+.sort-by {
     display: flex;
     flex-direction: row;
 }
